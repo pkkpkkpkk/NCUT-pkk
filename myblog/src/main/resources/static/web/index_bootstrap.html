@@ -1,0 +1,473 @@
+<!doctype html>
+<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <!-- 必须的 meta 标签 -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap 的 CSS 文件 -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+
+<!--    &lt;!&ndash; 引入layui.css &ndash;&gt;-->
+<!--    <link rel="stylesheet" href="https://www.layuicdn.com/layui-v2.5.6/css/layui.css">-->
+<!--    &lt;!&ndash; 引入layui.js &ndash;&gt;-->
+<!--    <script scr="https://www.layuicdn.com/layui-v2.5.6/layui.js"></script>-->
+
+
+    <title>彭彭博客</title>
+    <style>
+        #login{
+            margin-left: 5px;
+            cursor: pointer;
+        }
+
+    </style>
+</head>
+<body>
+<script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+<!--导航栏-->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark" >
+    <a class="navbar-brand" href="#">彭彭服务管理中心</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+                <a class="nav-link" href="#">主页 <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">官网</a>
+            </li>
+
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-expanded="false">
+                    导师
+                </a>
+                <div class="dropdown-menu">
+                    <a class="dropdown-item" href="#">阿晴</a>
+                    <a class="dropdown-item" href="#">阿杰</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="#">NLP小菜菜</a>
+                </div>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link disabled">北方工大</a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link" href="new/index_layui.html">新版系统</a>
+            </li>
+        </ul>
+
+
+        <form class="form-inline my-2 my-lg-0">
+            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+
+<!--             <a id="login" class="text-light" href="login.html">login</a>-->
+             <a id="login" onclick="exit_sys()" class="text-light" >退出</a>
+
+        </form>
+    </div>
+</nav>
+
+<!--左边功能-->
+<div class="row">
+    <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
+        <div class="sidebar-sticky pt-3">
+            <ul class="nav flex-column ">
+                <li class="nav-item">
+                    <a class="nav-link text-secondary active" href="#">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-home"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
+                        首页 <span class="sr-only">(current)</span>
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link text-secondary" id="library" href="#">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-buildings" viewBox="0 0 16 16">
+                            <path fill-rule="evenodd" d="M14.763.075A.5.5 0 0 1 15 .5v15a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5V14h-1v1.5a.5.5 0 0 1-.5.5h-9a.5.5 0 0 1-.5-.5V10a.5.5 0 0 1 .342-.474L6 7.64V4.5a.5.5 0 0 1 .276-.447l8-4a.5.5 0 0 1 .487.022ZM6 8.694 1 10.36V15h5V8.694ZM7 15h2v-1.5a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 .5.5V15h2V1.309l-7 3.5V15Z"/>
+                            <path d="M2 11h1v1H2v-1Zm2 0h1v1H4v-1Zm-2 2h1v1H2v-1Zm2 0h1v1H4v-1Zm4-4h1v1H8V9Zm2 0h1v1h-1V9Zm-2 2h1v1H8v-1Zm2 0h1v1h-1v-1Zm2-2h1v1h-1V9Zm0 2h1v1h-1v-1ZM8 7h1v1H8V7Zm2 0h1v1h-1V7Zm2 0h1v1h-1V7ZM8 5h1v1H8V5Zm2 0h1v1h-1V5Zm2 0h1v1h-1V5Zm0-2h1v1h-1V3Z"/>
+                        </svg>
+                        实验室简介
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a id="userinfo" class="nav-link text-secondary"  href="#">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file"><path d="M13 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"></path><polyline points="13 2 13 9 20 9"></polyline></svg>
+                        用户信息
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a id="passwordinfo" class="nav-link text-secondary" href="#">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-shopping-cart"><circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path></svg>
+                        修改密码
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-secondary" href="#">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-users"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+                        认证日志
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-secondary" href="#">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-bar-chart-2"><line x1="18" y1="20" x2="18" y2="10"></line><line x1="12" y1="20" x2="12" y2="4"></line><line x1="6" y1="20" x2="6" y2="14"></line></svg>
+                        上网明细
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link text-secondary" href="#">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-layers"><polygon points="12 2 2 7 12 12 22 7 12 2"></polygon><polyline points="2 17 12 22 22 17"></polyline><polyline points="2 12 12 17 22 12"></polyline></svg>
+                        结算清单
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+<!--    右上部分-->
+    <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-md-4"><div class="chartjs-size-monitor"><div class="chartjs-size-monitor-expand"><div class=""></div></div><div class="chartjs-size-monitor-shrink"><div class=""></div></div></div>
+        <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+            <h1 class="h2">NLP实验室</h1>
+            <div class="btn-toolbar mb-2 mb-md-0">
+                <div class="btn-group mr-2">
+                    <button type="button" class="btn btn-sm btn-outline-secondary">分享</button>
+                    <button type="button" class="btn btn-sm btn-outline-secondary">导出</button>
+                </div>
+                <button type="button" class="btn btn-sm btn-outline-secondary dropdown-toggle">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+                    日期
+                </button>
+            </div>
+        </div>
+
+<!--内容展示模块-->
+        <div id="content">
+
+<!--个人信息资料-->
+<!--            <form>-->
+<!--                <div class="form-group row">-->
+<!--                    <label for="staticEmail" class="col-sm-2 col-form-label">用户名</label>-->
+<!--                    <div class="col-sm-3">-->
+<!--                        &lt;!&ndash;                        设置不显示input边框，点击无反应&ndash;&gt;-->
+<!--                        <input type="text" readonly class="form-control" id="staticEmail" value="宝宝很可爱e" style="border:none;pointer-events: none;">-->
+<!--                    </div>-->
+<!--                </div>-->
+
+
+<!--                <div class="form-group row">-->
+<!--                    <label for="text1" class="col-sm-2 col-form-label">邮箱</label>-->
+<!--                    <div class="col-sm-3">-->
+<!--                        <input type="text" class="form-control" id="text1">-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--                <div class="form-group row">-->
+<!--                    <label for="text2" class="col-sm-2 col-form-label">电话</label>-->
+<!--                    <div class="col-sm-3">-->
+<!--                        <input type="text" class="form-control" id="text2">-->
+<!--                    </div>-->
+<!--                </div>-->
+
+
+<!--                <div class="form-group row">-->
+<!--                    <label class="col-md-2 control-label">性别：</label>-->
+<!--                    <div class="form-check form-check-inline">-->
+<!--                        <label class="form-check-label" for="inlineRadio1">男</label>-->
+<!--                        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1">-->
+
+<!--                    </div>-->
+<!--                    <div class="form-check form-check-inline">-->
+<!--                        <label class="form-check-label" for="inlineRadio2">女</label>-->
+<!--                        <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2">-->
+
+<!--                    </div>-->
+<!--                </div>-->
+
+
+<!--                <div class="form-group row">-->
+<!--                    <label for="inputPassword" class="col-sm-2 col-form-label">创建时间</label>-->
+<!--                    <div class="col-sm-3">-->
+<!--                        <input type="text" class="form-control" id="createtime">-->
+<!--                    </div>-->
+<!--                </div>-->
+
+<!--                <button type="button" class="btn btn-secondary">修改信息</button>-->
+<!--            </form>-->
+
+<!--修改密码-->
+<!--             <form>-->
+<!--                  <div class="form-group row">-->
+<!--                      <label for="inputPassword1" class="col-sm-2 col-form-label">原始密码</label>-->
+<!--                      <div class="col-sm-3"><input type="password" class="form-control" id="inputPassword1" value=""></div> </div>-->
+<!--                  <div class="form-group row">-->
+<!--                      <label for="inputPassword2" class="col-sm-2 col-form-label">新密码</label>-->
+<!--                      <div class="col-sm-3"><input type="password" class="form-control" id="inputPassword2" value=""></div> </div>-->
+<!--                  <div class="form-group row">-->
+<!--                      <label for="inputPassword3" class="col-sm-2 col-form-label">确认密码</label>-->
+<!--                      <div class="col-sm-3"><input type="password" class="form-control" id="inputPassword3" value=""></div> </div>-->
+<!--                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;-->
+<!--                  <button type="button" id="btn_updatePassword" class="btn btn-primary">修改</button>-->
+<!--              </form>-->
+
+
+        <img src="https://img2.baidu.com/it/u=1130989121,2531859260&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=281">
+        </div>
+
+
+
+    </main>
+</div>
+
+<script>
+    //点击 退出系统
+    function exit_sys(){
+        $.ajax({
+            url:"/users/logout",
+            type:"GET",
+            dataType:"JSON",
+            success:function (json){
+                if (json.state == 200){
+                    alert("退出系统成功")
+                    location.href="login.html"
+                }
+            },
+            error:function (xhr){
+                alert("退出系统时产生未知的异常"+json.message);
+            }
+        });
+    }
+
+    // 实验室简介
+    $("#library").click(function () {
+        // 清空内容
+        $("#content").empty();
+
+        // 追加内容
+        let html ="<h2>导师简介</h2>\n" +
+            "            <div class=\"table-responsive \" >\n" +
+            "\n" +
+            "                <!--                <p style=\"text-align:left;font-size: medium;white-space: normal;\"><br></p>-->\n" +
+            "                <!--                <p style=\"text-align: center\"><img src=\"http://csci.ncut.edu.cn/__local/D/BE/66/5DB092B41893777DCB4688BEA5B_68E5A594_5CFB.jpg\" width=\"173\" vsbhref=\"vurl\" vurl=\"/_vsl/DBE665DB092B41893777DCB4688BEA5B/68E5A594/5CFB\" vheight=\" 199px\" vwidth=\" 173px\" height=\"199\" orisrc=\"/__local/D/BE/66/5DB092B41893777DCB4688BEA5B_68E5A594_5CFB.jpg\" class=\"img_vsb_content\" style=\"width: 173px; height: 199px;\"></p>-->\n" +
+            "                <!--                <p style=\"text-align:left;font-size: medium;white-space: normal;text-indent: 28px\"><span style=\"color: rgb(51, 51, 51)\"></span><br></p>-->\n" +
+            "                <p style=\"text-align:left;font-size: medium;white-space: normal;text-indent: 28px\"><span style=\"color: rgb(51, 51, 51)\">刘杰，北方工业大学二级教授，博士生导师（语言智能方向），博士毕业于北京理工大学计算机应用技术专业，祖籍江苏徐州。中国语言智能研究中心副主任，中国人工智能学会理事，中国人工智能学会语言智能专委会秘书长，纽约州立大学布法罗分校访问学者。</span></p>\n" +
+            "                <p style=\"text-align:left;font-size: medium;white-space: normal;text-indent: 28px\"><span style=\"color: rgb(51, 51, 51)\">研究方向包括自然语言处理、知识工程、知识图谱等。主持</span><span lang=\"EN-US\" style=\"font-family: helvetica, sans-serif;color: rgb(51, 51, 51)\">1</span><span style=\"color: rgb(51, 51, 51)\">项国家科技部科技创新</span><span lang=\"EN-US\" style=\"font-family: helvetica, sans-serif;color: rgb(51, 51, 51)\">-2030</span><span style=\"\">“新一代人工智能”重大项目，</span><span lang=\"EN-US\" style=\"font-family: helvetica, sans-serif;color: rgb(51, 51, 51)\">1</span><span style=\"color: rgb(51, 51, 51)\">项国家重点研发计划项目子课题，</span><span lang=\"EN-US\" style=\"font-family: helvetica, sans-serif;color: rgb(51, 51, 51)\">3</span><span style=\"color: rgb(51, 51, 51)\">项国家自然科学基金面上项目，</span><span lang=\"EN-US\" style=\"font-family: helvetica, sans-serif;color: rgb(51, 51, 51)\">1</span><span style=\"color: rgb(51, 51, 51)\">项北京市教委重点项目（北京市教委</span><span lang=\"EN-US\" style=\"font-family: helvetica, sans-serif;color: rgb(51, 51, 51)\">-</span><span style=\"color: rgb(51, 51, 51)\">市基金委联合项目），</span><span lang=\"EN-US\" style=\"font-family: helvetica, sans-serif;color: rgb(51, 51, 51)\">1</span><span style=\"color: rgb(51, 51, 51)\">项北京市自然科学基金面上项目，</span><span lang=\"EN-US\" style=\"font-family: helvetica, sans-serif;color: rgb(51, 51, 51)\">1</span><span style=\"color: rgb(51, 51, 51)\">项北京市自然科学基金预探索项目，</span><span lang=\"EN-US\" style=\"font-family: helvetica, sans-serif;color: rgb(51, 51, 51)\">1</span><span style=\"color: rgb(51, 51, 51)\">项海淀区高价值专利培育运营中心项目，</span><span lang=\"EN-US\" style=\"font-family: helvetica, sans-serif;color: rgb(51, 51, 51)\">1</span><span style=\"color: rgb(51, 51, 51)\">项</span><span lang=\"EN-US\" style=\"font-family: helvetica, sans-serif;color: rgb(51, 51, 51)\">863</span><span style=\"color: rgb(51, 51, 51)\">项目子课题，多项横向课题。</span></p>\n" +
+            "                <p style=\"text-align:left;font-size: medium;white-space: normal;text-indent: 28px\"><span style=\"color: rgb(51, 51, 51)\">以第一作者或通讯作者在国内外重要学术刊物上发表学术论文</span><span lang=\"EN-US\" style=\"font-family: helvetica, sans-serif;color: rgb(51, 51, 51)\">50</span><span style=\"color: rgb(51, 51, 51)\">多篇，包括</span><span lang=\"EN-US\" style=\"font-family: helvetica, sans-serif;color: rgb(51, 51, 51)\">ACL</span><span style=\"color: rgb(51, 51, 51)\">、</span><span lang=\"EN-US\" style=\"font-family: helvetica, sans-serif;color: rgb(51, 51, 51)\">Signal Processing </span><span style=\"color: rgb(51, 51, 51)\">、</span><span lang=\"EN-US\" style=\"font-family: helvetica, sans-serif;color: rgb(51, 51, 51)\">Neurocomputing </span><span style=\"color: rgb(51, 51, 51)\">、</span><span lang=\"EN-US\" style=\"font-family: helvetica, sans-serif;color: rgb(51, 51, 51)\">IEEE Transactions on Processing</span><span style=\"color: rgb(51, 51, 51)\">、</span><span lang=\"EN-US\" style=\"font-family: helvetica, sans-serif;color: rgb(51, 51, 51)\">Applied Intelligence</span><span style=\"color: rgb(51, 51, 51)\">等人工智能类相关会议和</span><span lang=\"EN-US\" style=\"font-family: helvetica, sans-serif;color: rgb(51, 51, 51)\">SCI</span><span style=\"color: rgb(51, 51, 51)\">期刊。以第一发明人申请国家发明专利</span><span lang=\"EN-US\" style=\"font-family: helvetica, sans-serif;color: rgb(51, 51, 51)\">20</span><span style=\"color: rgb(51, 51, 51)\">多项，国际发明专利</span><span lang=\"EN-US\" style=\"font-family: helvetica, sans-serif;color: rgb(51, 51, 51)\">3</span><span style=\"color: rgb(51, 51, 51)\">项，目前已授权</span><span lang=\"EN-US\" style=\"font-family: helvetica, sans-serif;color: rgb(51, 51, 51)\">8</span><span style=\"color: rgb(51, 51, 51)\">项；登记软件著作权</span><span lang=\"EN-US\" style=\"font-family: helvetica, sans-serif;color: rgb(51, 51, 51)\">50</span><span style=\"color: rgb(51, 51, 51)\">项。</span></p>\n" +
+            "                <p style=\"text-align:left;font-size: medium;white-space: normal;text-indent: 28px\"><span style=\"color: rgb(51, 51, 51)\">成果被应用于对话机器人、东南亚舆情分析系统、国家广电总局监管中心和新华社</span><span lang=\"EN-US\" style=\"font-family: helvetica, sans-serif;color: rgb(51, 51, 51)\">UGC</span><span style=\"color: rgb(51, 51, 51)\">内容认证预警系统、中英文作文批改系统中，获得</span><span lang=\"EN-US\" style=\"font-family: helvetica, sans-serif;color: rgb(51, 51, 51)\">2017</span><span style=\"color: rgb(51, 51, 51)\">年北京市科技进步二等奖、</span><span lang=\"EN-US\" style=\"font-family: helvetica, sans-serif;color: rgb(51, 51, 51)\">2019</span><span style=\"color: rgb(51, 51, 51)\">年吴文俊人工智能科技进步一等奖。</span></p>\n" +
+            "                <p style=\"text-align:left;font-size: medium;white-space: normal;text-indent: 28px\"><span style=\"color: rgb(51, 51, 51)\">已指导博士和硕士研究生</span><span lang=\"EN-US\" style=\"font-family: helvetica, sans-serif;color: rgb(51, 51, 51)\">30</span><span style=\"color: rgb(51, 51, 51)\">多名，近年来毕业研究生被百度、汽车之家、中国工商银行总行信息中心、北京市丰台区国税局等单位录用，以及继续到北京理工大学、中国人民大学等高校攻读博士。</span></p>\n" +
+            "                <p style=\"text-align:left;font-size: medium;white-space: normal\"><span lang=\"EN-US\" style=\"font-family: helvetica, sans-serif;color: rgb(51, 51, 51)\"> EMAIL: liujxxxy@126.com</span></p>\n" +
+            "                <p style=\"text-align:left;font-size: medium;white-space: normal\"><br></p>\n" +
+            "\n" +
+            "            </div>"
+
+        $("#content").append(html)
+    });
+
+    // 用户信息
+    $("#userinfo").click(function (){
+        // 清空内容
+        $("#content").empty();
+
+        // 发送ajax请求 展示用户信息
+        $.ajax({
+            url:"/users/detail",
+            type:"GET",
+            // data:"username="+username+"&password="+password,
+            // data:$("#form-reg").serialize(),  会将data打包成一个entity中User实体类对象 user 传到controller
+            // data:{"username": username, "password": password},
+            dataType:"JSON",
+            success:function (json){
+                if (json.state == 200){
+                    let html =" <form>\n" +
+                        "                <div class=\"form-group row\">\n" +
+                        "                    <label for=\"staticEmail\" class=\"col-sm-2 col-form-label\">用户名</label>\n" +
+                        "                    <div class=\"col-sm-3\">\n" +
+                        "<!--                        设置不显示input边框，点击无反应-->\n" +
+                        "                        <input type=\"text\" readonly class=\"form-control\" id=\"staticEmail\" value=\"#{name}\" style=\"border:none;pointer-events: none;\">\n" +
+                        "                    </div>\n" +
+                        "                </div>\n" +
+                        "\n" +
+                        "                <div class=\"form-group row\">\n" +
+                        "                    <label for=\"text1\" class=\"col-sm-2 col-form-label\">邮箱</label>\n" +
+                        "                    <div class=\"col-sm-3\">\n" +
+                        "                        <input type=\"text\" class=\"form-control\" id=\"text1\" value=\"#{email}\">\n" +
+                        "                    </div>\n" +
+                        "                </div>\n" +
+                        "\n" +
+                        "\n" +
+                        "                <div class=\"form-group row\">\n" +
+                        "                    <label for=\"text2\" class=\"col-sm-2 col-form-label\">电话</label>\n" +
+                        "                    <div class=\"col-sm-3\">\n" +
+                        "                        <input type=\"text\" class=\"form-control\" id=\"text2\" value=\"#{phone}\">\n" +
+                        "                    </div>\n" +
+                        "                </div>\n" +
+                        "\n" +
+
+                        "                <div class=\"form-group row\">\n" +
+                        "                    <label class=\"col-md-2 control-label\">性别：</label>\n" +
+                        "                    <div class=\"form-check form-check-inline\">\n" +
+                        "                        <input class=\"form-check-input\" type=\"radio\" name=\"inlineRadioOptions\" id=\"gender-male\" value=\"1\" checked=\"\">\n" +
+                        "                        <label class=\"form-check-label\" for=\"inlineRadio1\">男</label>\n" +
+                        "                    </div>\n" +
+                        "                    <div class=\"form-check form-check-inline\">\n" +
+                        "                        <input class=\"form-check-input\" type=\"radio\" name=\"inlineRadioOptions\" id=\"gender-female\" value=\"0\" checked=\"\">\n" +
+                        "                        <label class=\"form-check-label\" for=\"inlineRadio2\">女</label>\n" +
+                        "                    </div>\n" +
+                        "                </div>\n" +
+                        "\n" +
+                        "\n" +
+                        "                <div class=\"form-group row\">\n" +
+                        "                    <label for=\"inputPassword\" class=\"col-sm-2 col-form-label\">创建时间</label>\n" +
+                        "                    <div class=\"col-sm-3\">\n" +
+                        "                        <input type=\"text\" class=\"form-control\" id=\"createtime\" value=\"#{date}\">\n" +
+                        "                    </div>\n" +
+                        "                </div>\n" +
+                        "\n" +
+                        "                <button onclick=\"updateinfo()\" type=\"button\" class=\"btn btn-secondary\">修改</button>\n" +
+                        "            </form>"
+
+                    // 拿到上面追加html的内容
+                    html = html.replace(/#{name}/g,json.data.username)
+                    html = html.replace("#{email}",json.data.email==null ? "" : json.data.email)
+                    html = html.replace("#{phone}",json.data.telephone==null ? "" :json.data.telephone)
+                    // 日期格式化
+                    html = html.replace("#{date}",json.data.createdTime)
+                    $("#content").append(html)
+
+                    // 选择器
+                    if (json.data.gender != null){
+                        let radio = json.data.gender ==0 ? $("#gender-female") : $("#gender-male")
+                        radio.prop("checked","checked")
+                    } else {
+                        // 性别选项默认不选
+                        $("input[name='inlineRadioOptions']").attr('checked',false);
+                    }
+
+                }else {
+                    alert("" + json.message)
+                }
+            },
+            error:function (xhr){
+                alert("点击用户信息时产生未知的异常"+xhr.status)
+            }
+        });
+    })
+
+    function updateinfo(){
+        //拿到前端，文本框，和单选框的 value值（文本框中的值，和选中单选框的value属性值）
+        let email = $("#text1").val()
+        let telephone = $("#text2").val()
+        let gender = $("input[type='radio']:checked").val(); //单选框中的 属性value值（可以为0和1）
+
+        // 如果 输入框为空，提交修改，则传到后端的是""  空字符串
+
+        // 发送ajax请求
+        $.ajax({
+            url:"/users/change_info",
+            type:"GET",
+            // data:"username="+username+"&password="+password,
+            // data:$("#form-reg").serialize(),  会将data打包成一个entity中User实体类对象 user 传到controller
+            data:{"email": email, "telephone": telephone,"gender":gender},
+            dataType:"JSON",
+            success:function (json){
+                if (json.state == 200){
+                    alert("修改成功")
+                }else {
+                    alert("" + json.message)
+                }
+            },
+            error:function (xhr){
+                alert("修改时产生未知的异常"+xhr.status)
+            }
+        });
+
+    }
+
+
+    // 修改密码
+    $("#passwordinfo").click(function (){
+        // 清空内容
+        $("#content").empty();
+        //填充修改页面内容
+        let html = ' <form>\n' +
+            '                <div class="form-group row">\n' +
+            '                    <label for="inputPassword1" class="col-sm-2 col-form-label">原始密码</label>\n' +
+            '                    <div class="col-sm-3">\n' +
+            '                        <input type="password" class="form-control" id="inputPassword1" value="">\n' +
+            '                    </div>\n' +
+            '                </div>\n' +
+            '                <div class="form-group row">\n' +
+            '                    <label for="inputPassword2" class="col-sm-2 col-form-label">新密码</label>\n' +
+            '                    <div class="col-sm-3">\n' +
+            '                        <input type="password" class="form-control" id="inputPassword2" value="">\n' +
+            '                    </div>\n' +
+            '                </div>\n' +
+            '                <div class="form-group row">\n' +
+            '                    <label for="inputPassword3" class="col-sm-2 col-form-label">确认密码</label>\n' +
+            '                    <div class="col-sm-3">\n' +
+            '                        <input type="password" class="form-control" id="inputPassword3" value="">\n' +
+            '                    </div>\n' +
+            '                </div>\n' +
+            '                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;\n' +
+            '                <button type="button" id="btn_updatePassword" class="btn btn-primary">修改</button>\n' +
+            '\n' +
+            '\n' +
+            '            </form>'
+        $("#content").append(html)
+
+        $("#btn_updatePassword").click(function () {
+
+            // 当点击修改密码的时候，再读取文本框中的内容
+            let oldPassword = $("#inputPassword1").val()
+            let newPassword = $("#inputPassword2").val()
+            let comfirmPassword = $("#inputPassword3").val()
+
+            if (oldPassword==""){
+                alert("旧密码输入为空，请输入")
+            }else if (newPassword =="" && comfirmPassword !=""){
+                alert("新密码输入为空，请输入")
+            }else if (newPassword !="" && comfirmPassword ==""){
+                alert("确认密码输入为空，请输入")
+            }else if (newPassword =="" && comfirmPassword ==""){
+                alert("新密码输入为空，确认密码输入为空，请输入")
+            }else if (newPassword != comfirmPassword){
+                alert("两次输入的密码不一致，请重新输入")
+            }else {
+                $.ajax({
+                    url:"/users/change_password",
+                    type:"GET",
+                    // data:"username="+username+"&password="+password,
+                    // data:$("#form-reg").serialize(),  会将data打包成一个entity中User实体类对象 user 传到controller
+                    data:{"oldPassword": oldPassword, "newPassword": newPassword},
+                    dataType:"JSON",
+                    success:function (json){
+                        if (json.state == 200){
+                            alert("修改密码成功")
+                            // 清空文本框,设置为空
+                            $("#inputPassword1").val("")
+                            $("#inputPassword2").val("")
+                            $("#inputPassword3").val("")
+                        }else {
+                            alert("" + json.message)
+                        }
+                    },
+                    error:function (xhr){
+                        alert("修改密码时产生未知的异常"+xhr.status)
+                    }
+                });
+
+
+            }
+        })
+    })
+    // 认证日志
+    // 上网明细
+    //  结算清单
+</script>
+
+</body>
+</html>

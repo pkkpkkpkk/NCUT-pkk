@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ncut.myblog.mapper.TeacherMapper">
+
+    <resultMap id="TeacherEntityMap" type="com.ncut.myblog.entity.Teacher">
+        <id column="tid" property="tid"></id>
+        <result column="graduated_school" property="graduatedSchool"></result>
+    </resultMap>
+
+    <!--    List<teacher> findAllTeacher();-->
+    <select id="findAllTeacher" resultMap="TeacherEntityMap">
+        select
+            tid,id,name,gender,graduated_school,position,title,field,description,email,phone
+        from t_teacher order by id asc limit 0,8;
+    </select>
+
+<!--    List<Teacher> findVTeacher(String v);-->
+    <select id="findVTeacher" resultMap="TeacherEntityMap">
+        select
+            *
+        from t_teacher
+        order by ${v} asc
+        limit 0,8;
+    </select>
+
+<!--    List<Teacher> findPVTeacher(Integer p,String v);页面p,排序方式v-->
+    <select id="findPVTeacher" resultMap="TeacherEntityMap">
+        select
+            *
+        from t_teacher
+        order by ${v} asc
+            limit #{p},8;
+    </select>
+
+<!--    Integer countTeachers();统计总数-->
+    <select id="countTeachers" resultType="java.lang.Integer">
+        select count(*) from t_teacher
+    </select>
+</mapper>

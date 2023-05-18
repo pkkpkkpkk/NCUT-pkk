@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ncut.myblog.mapper.UserMapper">
+    <resultMap id="UserEntityMap" type="com.ncut.myblog.entity.User">
+        <id column="uid" property="uid"></id>
+        <result column="created_time" property="createdTime"></result>
+        <result column="modified_time" property="modifiedTime"></result>
+        <result column="is_admin" property="isAdmin"></result>
+    </resultMap>
+
+<!--  注册  Integer insert(User user); uid是主键，不用手动插入数据-->
+    <insert id="insert" useGeneratedKeys="true" keyProperty="uid">
+        insert into t_user (username,password,gender,created_time,modified_time)
+        values (#{username},#{password},#{gender},#{createdTime},#{modifiedTime})
+    </insert>
+<!--(登录，注册用)查找一下当前用户名在数据库是否存在    User findByUsername(String username);-->
+    <select id="findByUsername"  resultMap="UserEntityMap">
+        select * from t_user where username=#{username}
+    </select>
+
+<!--  通过uid查找  User findByUid(Integer uid);-->
+    <select id="findByUid" resultMap="UserEntityMap">
+        select username,password,gender,created_time,modified_time,email,telephone,hobby,signature,is_admin from t_user where uid=#{uid}
+    </select>
+
+<!--    Integer updatePassword(String password,Date modifiedTime,Integer uid);-->
+    <update id="updatePassword">
+        update t_user set password=#{password},modified_time=#{modifiedTime} where uid=#{uid}
+    </update>
+
+<!--    Integer updateInfo(String email,String telephone,String hobby,String gender,String isAdmin,String signature, Date modifiedTime,Integer uid);
+前端文本框 可能传入空字符串-->
+    <update id="updateInfo">
+        update t_user set email= if(#{email}="",email,#{email}),
+                          telephone= if(#{telephone}="",telephone,#{telephone}),
+                          hobby= if(#{hobby}="",hobby,#{hobby}),
+                          gender= if(#{gender}="",gender,#{gender}),
+                          is_admin = if(#{isAdmin}="",is_admin,#{isAdmin}),
+                          modified_time=#{modifiedTime},
+                          signature = if(#{signature}="",signature,#{signature})
+            where uid=#{uid}
+    </update>
+
+</mapper>

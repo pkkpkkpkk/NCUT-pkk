@@ -1,0 +1,1865 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>北方工业大学NLP实验室</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="//cdn.staticfile.org/layui/2.8.0/css/layui.css" rel="stylesheet">
+
+    <!-- Bootstrap 的 CSS 文件 -->
+<!--    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">-->
+
+    <style>
+
+    </style>
+</head>
+<body>
+<!--引入jquery，因为要发送ajax请求-->
+<script src="https://code.jquery.com/jquery-3.0.0.min.js"></script>
+<!--引入bootstrap的js-->
+<!--<script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.5.1/jquery.min.js"></script>-->
+
+<div class="layui-layout layui-layout-admin">
+
+<!--    导航栏-->
+    <div class="layui-header">
+        <div class="layui-logo layui-hide-xs layui-bg-black">NLP实验室管理平台</div>
+        <!-- 头部区域（可配合layui 已有的水平导航） -->
+        <ul class="layui-nav layui-layout-left">
+            <!-- 移动端显示 -->
+            <li class="layui-nav-item layui-show-xs-inline-block layui-hide-sm" lay-header-event="menuLeft">
+                <i class="layui-icon layui-icon-spread-left"></i>
+            </li>
+            <li class="layui-nav-item layui-hide-xs"><a href="javascript:;">在读研究生</a></li>
+            <li class="layui-nav-item layui-hide-xs"><a href="javascript:;">科研项目</a></li>
+            <li class="layui-nav-item layui-hide-xs"><a href="page.html">研究生列表分页</a></li>
+            <li class="layui-nav-item">
+                <a href="javascript:;">师资队伍</a>
+                <dl class="layui-nav-child">
+                    <dd><a href="javascript:;">阿晴</a></dd>
+                    <dd><a href="javascript:;">阿杰</a></dd>
+                    <dd><a href="javascript:;">阿英</a></dd>
+                </dl>
+            </li>
+        </ul>
+        <ul class="layui-nav layui-layout-right">
+            <li class="layui-nav-item layui-hide layui-show-sm-inline-block">
+                <a href="javascript:;">
+                    <img src="//unpkg.com/outeres@0.0.10/img/layui/icon-v2.png" class="layui-nav-img">
+                    宝宝很可爱
+                </a>
+                <dl class="layui-nav-child">
+                    <dd><a href="javascript:;">个人中心</a></dd>
+                    <dd><a href="javascript:;">设置</a></dd>
+                    <dd><a id="logout" href="javascript:;">退出</a></dd>
+                </dl>
+            </li>
+<!--            右侧面板，在scrip中拼接网页，处理-->
+            <li class="layui-nav-item" lay-header-event="menuRight" lay-unselect>
+                <a href="javascript:;">
+                    <i class="layui-icon layui-icon-more-vertical"></i>
+                </a>
+            </li>
+        </ul>
+    </div>
+
+<!--    侧边栏-->
+    <div class="layui-side layui-bg-black">
+        <div class="layui-side-scroll">
+            <!-- 左侧导航区域（可配合layui已有的垂直导航） -->
+            <ul class="layui-nav layui-nav-tree" lay-filter="test">
+
+                <li class="layui-nav-item"><a href="index_layui.html">主页</a></li>
+                <li id="teacher_lj" class="layui-nav-item"><a href="javascript:;">导师刘杰</a></li>
+
+                <li class="layui-nav-item">
+                    <a href="javascript:;">信息学院</a>
+                    <dl class="layui-nav-child">
+                        <dd><a id="school-info" href="javascript:;">学院简介</a></dd>
+                        <dd><a id="school-teacher" href="javascript:;">师资力量</a></dd>
+                        <dd><a id="school-talent" href="javascript:;">人才强院</a></dd>
+                    </dl>
+                </li>
+
+                <li class="layui-nav-item layui-nav-itemed">
+                    <a class="" href="javascript:;">用户</a>
+                    <dl class="layui-nav-child">
+                        <dd><a id="person_info" href="javascript:;">个人信息</a></dd>
+                        <dd><a id="change_info" href="javascript:;">修改资料</a></dd>
+                        <dd><a id="change_password" href="javascript:;">修改密码</a></dd>
+                    </dl>
+                </li>
+                <li class="layui-nav-item">
+                    <a href="javascript:;">研究生管理</a>
+                    <dl class="layui-nav-child">
+                        <dd><a id="underlist" href="javascript:;">研究生信息</a></dd>
+                        <dd><a href="javascript:;">研究生科研成果</a></dd>
+                    </dl>
+                </li>
+
+                <li class="layui-nav-item">
+                    <a href="javascript:;">教师管理</a>
+                    <dl class="layui-nav-child">
+                        <dd><a id="teacherlist" href="javascript:;">教师列表</a></dd>
+                        <dd><a href="javascript:;">教师信息</a></dd>
+                    </dl>
+                </li>
+
+                <li class="layui-nav-item"><a href="javascript:;">签到系统</a></li>
+                <li class="layui-nav-item"><a href="javascript:;">关于</a></li>
+            </ul>
+        </div>
+    </div>
+
+<!--    body内容区域-->
+    <div class="layui-body">
+        <!-- 内容主体区域 -->
+        <div style="padding: 15px;">
+<!--            文字引用-->
+            <blockquote class="layui-elem-quote layui-text">
+                北方工业大学刘杰实验室欢迎您！！！
+            </blockquote>
+<!--           卡片+面板-->
+            <div class="layui-card layui-panel">
+                <div id="card_title" class="layui-card-header">
+                    书山有路勤为径，学海无涯苦做舟。
+                </div>
+<!--                    下面这个div主要是展示替换响应内容的-->
+                <div style="position:relative" class="layui-card-body layui-carousel" id="ID-carousel-demo-1">
+
+<!--                    默认展示三张转播图-->
+                    <div carousel-item>
+                        <div>
+                            <img  src="https://img0.baidu.com/it/u=4165537516,612682784&fm=253&fmt=auto&app=120&f=JPEG?w=1280&h=800">
+                        </div>
+                        <div>
+                            <img  src="https://img2.baidu.com/it/u=1116014913,107199332&fm=253&fmt=auto&app=120&f=JPEG?w=1280&h=800">
+                        </div>
+                        <div>
+                            <img  src="https://img2.baidu.com/it/u=867579726,2670217964&fm=253&fmt=auto&app=120&f=JPEG?w=1280&h=800">
+                        </div>
+                    </div>
+
+               </div>
+            </div>
+
+            <br><br>
+        </div>
+    </div>
+
+<!-- 底部固定区域 -->
+    <div class="layui-footer" style="text-align:center">
+        版权 北方工业大学研究生院 &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;地址：北京市石景山区晋元庄路5号 邮编：100144
+    </div>
+
+</div>
+
+<script src="//cdn.staticfile.org/layui/2.8.0/layui.js"></script>
+<script>
+
+    //JS
+    layui.use(['element', 'layer', 'util'], function(){
+        var element = layui.element;
+        var layer = layui.layer;
+        var util = layui.util;
+        var $ = layui.$;
+
+        //头部事件
+        util.event('lay-header-event', {
+            menuLeft: function(othis){ // 左侧菜单事件
+                layer.msg('展开左侧菜单的操作', {icon: 0});
+            },
+            menuRight: function(){  // 右侧菜单事件
+                layer.open({
+                    type: 1,
+                    title: '更多',
+                    content: '<div style="padding: 15px;">处理右侧面板的操作</div>',
+                    area: ['260px', '100%'],
+                    offset: 'rt', // 右上角
+                    anim: 'slideLeft', // 从右侧抽屉滑出
+                    shadeClose: true,
+                    scrollbar: false
+                });
+            }
+        });
+    });
+</script>
+
+<!--功能实现-->
+<script>
+    var vv=0; //存储排序方式的 字符串 id,name gender
+
+    var n=0
+    var m=1
+
+// 向用户问个好
+    layer.msg('北方工业大学 NLP实验室 欢迎你！！！');
+// 个人信息 表单效果
+    layui.use(['form'], function(){
+        var form = layui.form;
+        var layer = layui.layer;
+        // 提交事件
+        form.on('submit(demo2)', function(data){
+            var field = data.field; // 获取表单字段值
+            // 显示填写结果，仅作演示用
+            layer.alert(JSON.stringify(field), {
+                title: '当前填写的字段值'
+            });
+            // 此处可执行 Ajax 等操作
+            // …
+            return false; // 阻止默认 form 跳转
+        });
+    });
+// 图片轮播 效果
+    layui.use(function(){
+        //1..对轮播渲染
+        var carousel = layui.carousel;
+        // 渲染 - 常规轮播
+        carousel.render({
+            elem: '#ID-carousel-demo-1', //渲染
+            interval: 1800,  //设置时间间隔
+            anim: 'fade',    //动画类型
+            width: '1200px',
+            height: '600px'
+        });
+
+    });
+
+// 退出系统
+    $("#logout").click(function () {
+        var log_out = confirm("亲，确定要退出吗？")
+        if (log_out){
+
+            $.ajax({
+                url:"/users/logout",
+                type:"GET",
+                dataType:"JSON",
+                success:function (json){
+                    if (json.state==200){
+                        layer.msg('退出成功');
+                        location.href="../../index.html" //退 两级目录
+                    }else {
+                        alert("" + json.message)
+                    }
+                },
+                error:function (xhr){
+                    alert("退出时产生的异常"+json.message)
+                }
+            })
+        }
+    })
+
+// 页面加载
+// 导师刘杰 页面加载
+    function showTeacherLJ(){
+        $("#card_title").innerHTML = "<h3>北方工业大学博导刘杰教授</h3>"
+        // 清空内容
+        $(".layui-card-body").empty();
+        // 追加内容
+        let html = '<div class="v_news_content">\n' +
+            '<p style="text-align:left;font-size: medium;white-space: normal;text-indent: 28px"><br></p>\n' +
+            '<p style="text-align: center"><img src="http://csci.ncut.edu.cn/__local/D/BE/66/5DB092B41893777DCB4688BEA5B_68E5A594_5CFB.jpg" width="173" vsbhref="vurl" vurl="/_vsl/DBE665DB092B41893777DCB4688BEA5B/68E5A594/5CFB" vheight=" 199px" vwidth=" 173px" height="199" orisrc="/__local/D/BE/66/5DB092B41893777DCB4688BEA5B_68E5A594_5CFB.jpg" class="img_vsb_content" style="width: 173px; height: 199px;"></p>\n' +
+            '<p style="text-align:left;font-size: medium;white-space: normal;text-indent: 28px"><span style="color: rgb(51, 51, 51)"></span><br></p>\n' +
+            '<p style="text-align:left;font-size: medium;white-space: normal;text-indent: 28px"><span style="color: rgb(51, 51, 51)">刘杰，北方工业大学二级教授，博士生导师（语言智能方向），博士毕业于北京理工大学计算机应用技术专业，祖籍江苏徐州。中国语言智能研究中心副主任，中国人工智能学会理事，中国人工智能学会语言智能专委会秘书长，纽约州立大学布法罗分校访问学者。</span></p>\n' +
+            '<p style="text-align:left;font-size: medium;white-space: normal;text-indent: 28px"><span style="color: rgb(51, 51, 51)">研究方向包括自然语言处理、知识工程、知识图谱等。主持</span><span lang="EN-US" style="font-family: helvetica, sans-serif;color: rgb(51, 51, 51)">1</span><span style="color: rgb(51, 51, 51)">项国家科技部科技创新</span><span lang="EN-US" style="font-family: helvetica, sans-serif;color: rgb(51, 51, 51)">-2030</span><span style="color: rgb(51, 51, 51)">“新一代人工智能”重大项目，</span><span lang="EN-US" style="font-family: helvetica, sans-serif;color: rgb(51, 51, 51)">1</span><span style="color: rgb(51, 51, 51)">项国家重点研发计划项目子课题，</span><span lang="EN-US" style="font-family: helvetica, sans-serif;color: rgb(51, 51, 51)">3</span><span style="color: rgb(51, 51, 51)">项国家自然科学基金面上项目，</span><span lang="EN-US" style="font-family: helvetica, sans-serif;color: rgb(51, 51, 51)">1</span><span style="color: rgb(51, 51, 51)">项北京市教委重点项目（北京市教委</span><span lang="EN-US" style="font-family: helvetica, sans-serif;color: rgb(51, 51, 51)">-</span><span style="color: rgb(51, 51, 51)">市基金委联合项目），</span><span lang="EN-US" style="font-family: helvetica, sans-serif;color: rgb(51, 51, 51)">1</span><span style="color: rgb(51, 51, 51)">项北京市自然科学基金面上项目，</span><span lang="EN-US" style="font-family: helvetica, sans-serif;color: rgb(51, 51, 51)">1</span><span style="color: rgb(51, 51, 51)">项北京市自然科学基金预探索项目，</span><span lang="EN-US" style="font-family: helvetica, sans-serif;color: rgb(51, 51, 51)">1</span><span style="color: rgb(51, 51, 51)">项海淀区高价值专利培育运营中心项目，</span><span lang="EN-US" style="font-family: helvetica, sans-serif;color: rgb(51, 51, 51)">1</span><span style="color: rgb(51, 51, 51)">项</span><span lang="EN-US" style="font-family: helvetica, sans-serif;color: rgb(51, 51, 51)">863</span><span style="color: rgb(51, 51, 51)">项目子课题，多项横向课题。</span></p>\n' +
+            '<p style="text-align:left;font-size: medium;white-space: normal;text-indent: 28px"><span style="color: rgb(51, 51, 51)">以第一作者或通讯作者在国内外重要学术刊物上发表学术论文</span><span lang="EN-US" style="font-family: helvetica, sans-serif;color: rgb(51, 51, 51)">50</span><span style="color: rgb(51, 51, 51)">多篇，包括</span><span lang="EN-US" style="font-family: helvetica, sans-serif;color: rgb(51, 51, 51)">ACL</span><span style="color: rgb(51, 51, 51)">、</span><span lang="EN-US" style="font-family: helvetica, sans-serif;color: rgb(51, 51, 51)">Signal Processing </span><span style="color: rgb(51, 51, 51)">、</span><span lang="EN-US" style="font-family: helvetica, sans-serif;color: rgb(51, 51, 51)">Neurocomputing </span><span style="color: rgb(51, 51, 51)">、</span><span lang="EN-US" style="font-family: helvetica, sans-serif;color: rgb(51, 51, 51)">IEEE Transactions on Processing</span><span style="color: rgb(51, 51, 51)">、</span><span lang="EN-US" style="font-family: helvetica, sans-serif;color: rgb(51, 51, 51)">Applied Intelligence</span><span style="color: rgb(51, 51, 51)">等人工智能类相关会议和</span><span lang="EN-US" style="font-family: helvetica, sans-serif;color: rgb(51, 51, 51)">SCI</span><span style="color: rgb(51, 51, 51)">期刊。以第一发明人申请国家发明专利</span><span lang="EN-US" style="font-family: helvetica, sans-serif;color: rgb(51, 51, 51)">20</span><span style="color: rgb(51, 51, 51)">多项，国际发明专利</span><span lang="EN-US" style="font-family: helvetica, sans-serif;color: rgb(51, 51, 51)">3</span><span style="color: rgb(51, 51, 51)">项，目前已授权</span><span lang="EN-US" style="font-family: helvetica, sans-serif;color: rgb(51, 51, 51)">8</span><span style="color: rgb(51, 51, 51)">项；登记软件著作权</span><span lang="EN-US" style="font-family: helvetica, sans-serif;color: rgb(51, 51, 51)">50</span><span style="color: rgb(51, 51, 51)">项。</span></p>\n' +
+            '<p style="text-align:left;font-size: medium;white-space: normal;text-indent: 28px"><span style="color: rgb(51, 51, 51)">成果被应用于对话机器人、东南亚舆情分析系统、国家广电总局监管中心和新华社</span><span lang="EN-US" style="font-family: helvetica, sans-serif;color: rgb(51, 51, 51)">UGC</span><span style="color: rgb(51, 51, 51)">内容认证预警系统、中英文作文批改系统中，获得</span><span lang="EN-US" style="font-family: helvetica, sans-serif;color: rgb(51, 51, 51)">2017</span><span style="color: rgb(51, 51, 51)">年北京市科技进步二等奖、</span><span lang="EN-US" style="font-family: helvetica, sans-serif;color: rgb(51, 51, 51)">2019</span><span style="color: rgb(51, 51, 51)">年吴文俊人工智能科技进步一等奖。</span></p>\n' +
+            '<p style="text-align:left;font-size: medium;white-space: normal;text-indent: 28px"><span style="color: rgb(51, 51, 51)">已指导博士和硕士研究生</span><span lang="EN-US" style="font-family: helvetica, sans-serif;color: rgb(51, 51, 51)">30</span><span style="color: rgb(51, 51, 51)">多名，近年来毕业研究生被百度、汽车之家、中国工商银行总行信息中心、北京市丰台区国税局等单位录用，以及继续到北京理工大学、中国人民大学等高校攻读博士。</span></p>\n' +
+            '<p style="text-align:left;font-size: medium;white-space: normal"><span lang="EN-US" style="font-family: helvetica, sans-serif;color: rgb(51, 51, 51)"> EMAIL: liujxxxy@126.com</span></p>\n' +
+            '<p style="text-align:left;font-size: medium;white-space: normal"><br></p>\n' +
+            '</div>'
+        $(".layui-card-body").append(html)
+    }
+ // 学院简介
+    function showSchoolInfo(){
+        // 先清空设置为空，再加载新内容
+        $("#card_title").innerHTML = "<h3>北方工业大学信息学院简介</h3>"
+        // 清空内容
+        $(".layui-card-body").empty();
+        // 追加内容
+        let html = ' <div class="right-con">\n' +
+            '                        <p>\n' +
+            '                        </p>' +
+            '<hr><br><div id="vsb_content_1291_u81"><div id="vsb_content"><p><span style="color: rgb(51, 51, 51); text-indent: 24px; background-color: rgb(255, 255, 255); font-size: 16px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;信息学院现有在职教工164人，其中教授36人，副教授60人，具有博士学位的教工105人，学院专任教师中具有博士学位的教师占71%。教师队伍中有全国优秀教师2人、青年北京学者1人、北京市突出贡献专家1人、北京市先进工作者1人、北京市教学名师3人、中科院百人计划1人、北京市优秀教师2人、北京市师德标兵1人，北京市高层次人才2名、北京市拔尖人才2人、北京市学术创新团队6个、北京市优秀教学团队2个、北京市学术创新人才1人、北京市百千万人才工程2人、北京市长城学者2人，北京市中青年骨干教师8人，多名教师被学校授予先进工作者、师德优秀个人等荣誉称号。</span></p></div></div>\n' +
+            '                        <span id="vsb_content_1291_u8" name="vsb_content_1291_u8"></span><br><br>\n' +
+            '                        <p></p>\n' +
+            '                    </div> '
+        $(".layui-card-body").append(html)
+    }
+// 师资力量
+    function showSchoolTeacher(){
+        // 先清空设置为空，再加载新内容
+        $("#card_title").innerHTML = ""
+        $("#card_title").innerHTML = "<h3>北方工业大学信息学院 师资力量</h3>"
+        // 清空内容
+        $(".layui-card-body").empty();
+        // 追加内容
+        let html = '<div class="right-con">\n' +
+            '                        <p>\n' +
+            '                        </p><div id="vsb_content_2_1384_u81"><div id="vsb_content_2"><hr><p class="vsbcontent_start">学院具有良好的师资结构，具有博士生导师、硕士生导师80多人，专任教师中有71%的教师具有博士学位，高级职称教师占比60%。</p>\n' +
+            '                        <hr><br><p class="vsbcontent_start"><span style="font-size: 29px;">计算机系</span></p>\n' +
+            '                        <hr><br><p><strong>正高级职称：</strong></p>\n' +
+            '                        <table style="width:900px;">\n' +
+            '                            <tbody>\n' +
+            '                            <tr class="firstRow">\n' +
+            '                                <td width="94" valign="top"><p><a href="http://lwss.ncut.edu.cn/TutorServlet?action=queryDs&amp;teacherid=XjRvIOqr7NVS8XolOavvtg==">马 礼</a></p></td>\n' +
+            '                                <td width="94" valign="top"><p><a href="http://lwss.ncut.edu.cn/TutorServlet?action=queryDs&amp;teacherid=NnRLrW2tcSkyZ4TAmTsKmQ==">王月海</a></p></td>\n' +
+            '                                <td width="94" valign="top"><p><a href="http://lwss.ncut.edu.cn/TutorServlet?action=queryDs&amp;teacherid=XG5osUqAX_Hat7oQcoMhxQ==">王辉柏</a></p></td>\n' +
+            '                                <td width="94" valign="top"><p><a href="http://lwss.ncut.edu.cn/TutorServlet?action=queryDs&amp;teacherid=RXrjyhBpz_z4eSQ0j7ei5g==">王景中</a></p></td>\n' +
+            '                                <td width="94" valign="top"><p><a href="http://lwss.ncut.edu.cn/TutorServlet?action=queryDs&amp;teacherid=g7Bi9rX4qbRTm7@g1eg0uw==">蔡兴泉</a></p></td>\n' +
+            '                                <td width="94" valign="top"><p><a href="http://lwss.ncut.edu.cn/TutorServlet?action=queryDs&amp;teacherid=GEFwYL1cFzDwcWBWzO5XSQ==">刘高军</a></p></td>\n' +
+            '                                <td width="94" valign="top"><p><a href="http://lwss.ncut.edu.cn/TutorServlet?action=queryDs&amp;teacherid=fU6HKl9csOY_qqqgoKznMA==">苏志同</a></p></td>\n' +
+            '                                <td width="94" valign="top"><p><a href="http://lwss.ncut.edu.cn/TutorServlet?action=queryDs&amp;teacherid=LtQte0SwXFiR7CPOfaOhnw==">杜春涛</a></p></td>\n' +
+            '                                <td width="94" valign="top"><p><a href="http://lwss.ncut.edu.cn/TutorServlet?action=queryDs&amp;teacherid=J2uM0QaxBpEcor5GKtMNOQ==">李晋宏</a></p></td>\n' +
+            '                                <td width="94" valign="top"><p><a href="http://lwss.ncut.edu.cn/TutorServlet?action=queryDs&amp;teacherid=kvvj9tnG@aGNK3Ti6rQnaw==">肖 珂</a></p></td>\n' +
+            '                            </tr>\n' +
+            '                            <tr>\n' +
+            '                                <td width="94" valign="top"><p><a href="http://lwss.ncut.edu.cn/TutorServlet?action=queryDs&amp;teacherid=NoaWnx3ua2TVtvD8YkLSSQ==">宋 威</a></p></td>\n' +
+            '                                <td width="94" valign="top"><p><a href="http://lwss.ncut.edu.cn/TutorServlet?action=queryDs&amp;teacherid=Wsimb9fUtDrPcIK7X@NwTQ==">曹丹阳</a></p></td>\n' +
+            '                                <td width="94" valign="top"><p><a href="http://lwss.ncut.edu.cn/TutorServlet?action=queryDs&amp;teacherid=9sxg8gJerY00BsaFgcFZ5Q==">张永梅</a></p></td>\n' +
+            '                                <td width="94" valign="top"><p><a href="http://lwss.ncut.edu.cn/TutorServlet?action=queryDs&amp;teacherid=eKpkAeeCnRfQTxnTNubgMg==">马东超</a></p></td>\n' +
+            '                                <td width="94" valign="top"><p><a href="http://lwss.ncut.edu.cn/TutorServlet?action=queryDs&amp;teacherid=trgv0OG5VUB1zYciBxeMwA==">段建勇</a></p></td>\n' +
+            '                                <td width="94" valign="top"><p><a href="http://lwss.ncut.edu.cn/TutorServlet?action=queryDs&amp;teacherid=efdJPIlWBOznhTVw67VfXg==">张涛</a></p></td>\n' +
+            '                                <td width="94" valign="top"><p><a href="http://lwss.ncut.edu.cn/TutorServlet?action=queryDs&amp;teacherid=iq4A5yzVO4Kxaegou6@@Ng==">刘杰</a></p></td>\n' +
+            '                                <td width="94" valign="top"><p><br></p></td>\n' +
+            '                                <td width="94" valign="top"><p><br></p></td>\n' +
+            '                                <td width="94" valign="top"><p><br></p></td>\n' +
+            '                            </tr>\n' +
+            '                            </tbody>\n' +
+            '                        </table>\n' +
+            '                        <hr><br><p><strong>副高级职称：</strong></p>\n' +
+            '                        <table style="width:900px;">\n' +
+            '                            <tbody>\n' +
+            '                            <tr class="firstRow">\n' +
+            '                                <td width="95" valign="top"><p><a href="http://lwss.ncut.edu.cn/TutorServlet?action=queryDs&amp;teacherid=dp4OgzhKZ_3jSTG6yFqbiA==">王若宾</a></p></td>\n' +
+            '                                <td width="95" valign="top"><p><a href="http://lwss.ncut.edu.cn/TutorServlet?action=queryDs&amp;teacherid=_4YEK67C23MVxPni8D_Gxg==">王宝成</a></p></td>\n' +
+            '                                <td width="95" valign="top"><p><a href="http://lwss.ncut.edu.cn/TutorServlet?action=queryDs&amp;teacherid=usMiWfAiLtdEyLLY7VdtFw==">方英兰</a></p></td>\n' +
+            '                                <td width="95" valign="top"><p><a href="http://lwss.ncut.edu.cn/TutorServlet?action=queryDs&amp;teacherid=No2E5RdJbg03c_dpofDslQ==">孙 晶</a></p></td>\n' +
+            '                                <td width="95" valign="top"><p><a href="http://lwss.ncut.edu.cn/TutorServlet?action=queryDs&amp;teacherid=No2E5RdJbg03c_dpofDslQ==">杜春来</a></p></td>\n' +
+            '                                <td width="95" valign="top"><p><a href="http://lwss.ncut.edu.cn/TutorServlet?action=queryDs&amp;teacherid=@Anj5yf9r3Lsk05W7Qw8FQ==">李 洋</a></p></td>\n' +
+            '                                <td width="95" valign="top"><p><a href="http://lwss.ncut.edu.cn/TutorServlet?action=queryDs&amp;teacherid=JVS8WBpYdiG0GZnFUv1I9A==">李 琛</a></p></td>\n' +
+            '                                <td width="95" valign="top"><p><a href="http://lwss.ncut.edu.cn/TutorServlet?action=queryDs&amp;teacherid=Dw5kWzNBtxuDuslmGqVmKA==">吴 磊</a></p></td>\n' +
+            '                                <td width="95" valign="top"><p><a href="http://lwss.ncut.edu.cn/TutorServlet?action=queryDs&amp;teacherid=A8gbqUdpWNAiOQdAhY6SQA==">何 丽</a></p></td>\n' +
+            '                                <td width="95" valign="top"><p><a href="http://lwss.ncut.edu.cn/TutorServlet?action=queryDs&amp;teacherid=5eih2rCiltvcEVDVgBFD0Q==">宋丽华</a></p></td>\n' +
+            '                            </tr>\n' +
+            '                            <tr>\n' +
+            '                                <td width="95" valign="top"><p><a href="http://lwss.ncut.edu.cn/TutorServlet?action=queryDs&amp;teacherid=dhg6PDht9gelC52riD_k3Q==">范涵奇</a></p></td>\n' +
+            '                                <td width="95" valign="top"><p><a href="http://lwss.ncut.edu.cn/TutorServlet?action=queryDs&amp;teacherid=mFxVwMAwusB2qZX9FVSWqg==">林满山</a></p></td>\n' +
+            '                                <td width="95" valign="top"><p><a href="http://lwss.ncut.edu.cn/TutorServlet?action=queryDs&amp;teacherid=9G0V9yF2e6iqK9vyS6Romw==">胡 健</a></p></td>\n' +
+            '                                <td width="95" valign="top"><p><a href="http://lwss.ncut.edu.cn/TutorServlet?action=queryDs&amp;teacherid=CzonWnnBXmrPcUivMGMVJA==">韩 兵</a></p></td>\n' +
+            '                                <td width="95" valign="top"><p><a href="http://lwss.ncut.edu.cn/TutorServlet?action=queryDs&amp;teacherid=g00MXHyfJWVRrOkSk3sPzw==">童立靖</a></p></td>\n' +
+            '                                <td width="95" valign="top"><p><a href="http://lwss.ncut.edu.cn/TutorServlet?action=queryDs&amp;teacherid=GmKYR3SKka0ChT_fMa6Jtg==">曾凡锋</a></p></td>\n' +
+            '                                <td width="95" valign="top"><p><a href="http://lwss.ncut.edu.cn/TutorServlet?action=queryDs&amp;teacherid=cvBVENxsQanu4sc1fUzvuw==">王昊</a></p></td>\n' +
+            '                                <td width="95" valign="top"><p><a href="http://lwss.ncut.edu.cn/TutorServlet?action=queryDs&amp;teacherid=3BSub0vZ9GSMV1nGooatKA==">王超</a></p></td>\n' +
+            '                                <td width="95" valign="top"><p><a href="http://lwss.ncut.edu.cn/TutorServlet?action=queryDs&amp;teacherid=YQEP2_0torpIJ7sP3Ojp4w==">傅颖勋</a></p></td>\n' +
+            '                                <td width="95" valign="top"><p><a href="http://lwss.ncut.edu.cn/TutorServlet?action=queryDs&amp;teacherid=YTx75JjaQGkuE4yNcPF9Ig==">何云华</a></p></td>\n' +
+            '                            </tr>\n' +
+            '                            </tbody>\n' +
+            '                        </table>\n' +
+            '                        <hr><br><p><strong>中级职称及其他：</strong></p>\n' +
+            '                        <table style="width:900px;">\n' +
+            '                            <tbody>\n' +
+            '                            <tr class="firstRow">\n' +
+            '                                <td width="94" valign="top" height="13"><p>韦欢</p></td>\n' +
+            '                                <td width="94" valign="top" height="13"><p>李伟</p></td>\n' +
+            '                                <td width="94" valign="top" height="13"><p>李杰</p></td>\n' +
+            '                                <td width="94" valign="top" height="13"><p>李源</p></td>\n' +
+            '                                <td width="94" valign="top" height="13"><p>杨建</p></td>\n' +
+            '                                <td width="94" valign="top" height="13"><p>束劼</p></td>\n' +
+            '                                <td width="94" valign="top" height="13"><p>吴明礼</p></td>\n' +
+            '                                <td width="94" valign="top" height="13"><p>付瑞平</p></td>\n' +
+            '                                <td width="94" valign="top" height="13"><p>吴爱燕</p></td>\n' +
+            '                                <td width="94" valign="top" height="13"><p>张光子</p></td>\n' +
+            '                            </tr>\n' +
+            '                            <tr>\n' +
+            '                                <td width="94" valign="top" height="14"><p>陈卫</p></td>\n' +
+            '                                <td width="94" valign="top" height="11"><p>胡燕</p></td>\n' +
+            '                                <td width="94" valign="top" height="11"><p>侯建峰</p></td>\n' +
+            '                                <td width="94" valign="top" height="11"><p>徐刚</p></td>\n' +
+            '                                <td width="94" valign="top" height="11"><p>徐迟</p></td>\n' +
+            '                                <td width="94" valign="top" height="11"><p>高磊</p></td>\n' +
+            '                                <td width="94" valign="top" height="11"><p>郭峰</p></td>\n' +
+            '                                <td width="94" valign="top" height="11"><p>席军林</p></td>\n' +
+            '                                <td width="94" valign="top" height="11"><p>冀晓鹏</p></td>\n' +
+            '                                <td width="94" valign="top" height="11"><p>杨和家</p></td>\n' +
+            '                            </tr>\n' +
+            '                            <tr>\n' +
+            '                                <td width="94" valign="top" height="11"><p>廖联军</p></td>\n' +
+            '                                <td width="94" valign="top" height="11"><p>侯艳红</p></td>\n' +
+            '                                <td width="94" valign="top" height="11"><p>李宗扬</p></td>\n' +
+            '                                <td width="94" valign="top" height="11"><p>李欣</p></td>\n' +
+            '                                <td width="94" valign="top" height="15"><p>朱孟笑</p></td>\n' +
+            '                                <td width="94" valign="top" height="15"><p>许明英</p></td>\n' +
+            '                                <td width="94" valign="top" height="15"><p>卢博</p></td>\n' +
+            '                                <td width="94" valign="top" height="15"><p>郭颖</p></td>\n' +
+            '                                <td width="94" valign="top" height="15"><p>周锋</p></td>\n' +
+            '                                <td width="94" valign="top" height="15"><p>李颖</p></td>\n' +
+            '                            </tr>\n' +
+            '                            <tr>\n' +
+            '                                <td width="94" valign="top" height="11"><p>张晴</p></td>\n' +
+            '                                <td width="94" valign="top" height="11"><p>武志刚</p></td>\n' +
+            '                                <td width="94" valign="top" height="11"><p>史益芳</p></td>\n' +
+            '                                <td width="94" valign="top" height="11"><p>乔梦宇</p></td>\n' +
+            '                                <td width="94" valign="top" height="11"><p>王旭</p></td>\n' +
+            '                                <td width="94" valign="top" height="11"><p>杨光灿</p></td>\n' +
+            '                                <td width="94" valign="top" height="11"><p><br></p></td>\n' +
+            '                                <td width="94" valign="top" height="11"><p><br></p></td>\n' +
+            '                                <td width="94" valign="top" height="11"><p><br></p></td>\n' +
+            '                                <td width="94" valign="top" height="11"><p><br></p></td>\n' +
+            '                            </tr>\n' +
+            '                            <tr>\n' +
+            '                                <td width="94" valign="top" height="6"><br></td>\n' +
+            '                                <td width="94" valign="top" height="6"><br></td>\n' +
+            '                                <td width="94" valign="top" height="6"><br></td>\n' +
+            '                                <td width="94" valign="top" height="6"><br></td>\n' +
+            '                                <td width="94" valign="top" height="6"><br></td>\n' +
+            '                                <td width="94" valign="top" height="6"><br></td>\n' +
+            '                                <td width="94" valign="top" height="6"><br></td>\n' +
+            '                                <td width="94" valign="top" height="6"><br></td>\n' +
+            '                                <td width="94" valign="top" height="6"><br></td>\n' +
+            '                                <td width="94" valign="top" height="6"><br></td>\n' +
+            '                            </tr>\n' +
+            '                            </tbody>\n' +
+            '                        </table>\n' +
+            '                        <p></p>\n' +
+            '\n' +
+            '                    </div>\n'
+        $(".layui-card-body").append(html)
+    }
+// 人才强院
+    function showSchoolTalent(){
+        // 先清空设置为空，再加载新内容
+        $("#card_title").innerHTML = ""
+        $("#card_title").innerHTML = "<h3>北方工业大学 信息学院——人才强院</h3>"
+        // 清空内容
+        $(".layui-card-body").empty();
+        // 追加内容
+        let html = '<div class="right-con">\n' +
+            '                        <p>\n' +
+            '                        <hr></p><div id="vsb_content_2_1339_u81"><div id="vsb_content_2"><p class="vsbcontent_start">&nbsp;&nbsp;&nbsp;&nbsp;学院十分重视人才队伍建设，努力为创新人才和科技创新团队创造条件，加强建设，以此带动学院核心竞争力的提升。在人才培养、科学研究、服务社会、国际交流与合作等方面，取得了一系列成果。近年来学院教师先后获得多项荣誉和称号，包括 “全国优秀教师”、“北京市优秀青年知识分子”、“北京市优秀教师”、“北京市优秀教师”、“首都劳动奖章”、“北京市先进工作者”等，有力地提升了学院办学实力，为人才培养奠定了良好基础。</p>\n' +
+            '                        <hr><br><p><strong>全国优秀教师：</strong>李晋宏（2009）</p>\n' +
+            '                        <p><strong>国家级教学成果奖：</strong>柳长安（2018，二等奖）</p>\n' +
+            '                        <p><strong style="white-space: normal;">青年北京学者：王彦平</strong><span style="text-indent: 28px;">（2022）</span></p>\n' +
+            '                        <p><strong style="text-indent: 2em;">北京市百千万人才工程：</strong>张卫平（2014），宋威（2016），张常年（2017），张萌萌（2018）<br></p>\n' +
+            '                        <p><strong>北京市教学名师奖：</strong>张卫平（2008），张常年（2012），马礼（2017），杜春涛（2022）</p>\n' +
+            '                        <p><strong style="white-space: normal;">北京市青年教学名师奖：</strong><span style="text-indent: 28px;">蔡兴泉（2021）</span></p>\n' +
+            '                        <p><strong>北京市优秀教学团队：</strong>电子电路实验教学团队（2006），计算机系统能力培养育人团队（2022）</p>\n' +
+            '                        <p><strong>北京市科技新星：</strong>张萌萌（2014）</p>\n' +
+            '                        <p><strong>北京市长城学者：</strong><span style="text-indent: 28px;">张萌萌（2017），宋威（2019）</span></p>\n' +
+            '                        <p><strong style="text-indent: 2em;">北京市中青年骨干人才：</strong>蔡兴泉(2009)，宋威、童立靖、肖珂（2010）<br></p>\n' +
+            '                        <p><strong>北京市委组织部优秀人才：</strong>肖珂、宋威（2009），曹丹阳（2011）</p>\n' +
+            '                        <p><strong style="text-indent: 2em;">北京高创计划青年拔尖人才</strong>：宋威（2015）<br></p>\n' +
+            '                        <p><strong>北京市有突出贡献的中青年专家：</strong>李晋宏(2007)</p>\n' +
+            '                        <p><strong>北京市学术创新人才：</strong>王一丁（2009）</p>\n' +
+            '                        <p><strong>北京市学术创新团队：</strong>李晋宏(2006)，马礼(2009)，赵会群(2010)，张卫平、韩燕波（2013），王彦平（2019）</p>\n' +
+            '                        <p><strong style="text-indent: 2em;">北京市高层次人才</strong>：张卫平（2010），李晋宏（2010），王景中(2011)<br></p>\n' +
+            '                        <p><strong>北京市教学成果奖：</strong>李晋宏(2012，二等奖)，蔡兴泉（2017，二等奖），杜春涛（2021，一等奖），王月海（2021，二等奖）</p>\n' +
+            '                        <p><strong>青年拔尖人才培育计划</strong>：董小伟、张键红（2013），戴澜、段建勇（2014），张萌萌、王月海（2015），范涵奇、田青（2017），李琛（2019）</p>\n' +
+            '                        <p class="vsbcontent_end"><strong>北京市青年英才计划：</strong>宋丽华、张光子（2013）</p></div></div>\n' +
+            '                        <span id="vsb_content_2_1339_u8" name="vsb_content_2_1339_u8"></span><br><br>\n' +
+            '\n' +
+            '                        <p></p>\n' +
+            '\n' +
+            '                    </div>'
+        $(".layui-card-body").append(html)
+    }
+
+    $("#school-info").click(function () {
+        showSchoolInfo();
+    })
+    $("#school-teacher").click(function () {
+        showSchoolTeacher()
+    })
+    $("#school-talent").click(function () {
+        showSchoolTalent()
+    })
+
+// 个人信息 页面加载
+    function showPersonInfo(){
+        // 清空内容
+        $(".layui-card-body").empty();
+
+        // 发送ajax请求 展示个人信息
+        $.ajax({
+            url:"/users/detail",
+            type:"GET",
+            dataType:"JSON",
+            success:function (json){
+                if (json.state == 200){
+                    let html = ' <!-- 给容器追加 class="layui-form-pane"，即可显示为方框风格 -->\n' +
+                        '                    <form class="layui-form layui-form-pane" action="">\n' +
+                        '\n' +
+                        '                        <div class="layui-form-item">\n' +
+                        '                            <label class="layui-form-label">用户名</label>\n' +
+                        '                            <div class="layui-input-inline">\n' +
+                        '                                <input disabled value="#{username}" type="text" name="username" placeholder="" lay-verify="required" autocomplete="off" class="layui-input">\n' +
+                        '                            </div>\n' +
+                        '                        </div>\n' +
+                        '\n' +
+                        '                        <div class="layui-form-item">\n' +
+                        '                            <div class="layui-inline">\n' +
+                        '                                <label class="layui-form-label">邮箱</label>\n' +
+                        '                                <div class="layui-input-inline">\n' +
+                        '                                    <input disabled value="#{email}" type="text" name="email" lay-verify="email" autocomplete="off" class="layui-input">\n' +
+                        '                                </div>\n' +
+                        '                            </div>\n' +
+                        '                        </div>\n' +
+                        '\n' +
+                        '                        <div class="layui-form-item">\n' +
+                        '                            <div class="layui-inline">\n' +
+                        '                                <label class="layui-form-label">电话号码</label>\n' +
+                        '                                <div class="layui-input-inline layui-input-wrap">\n' +
+                        '                                    <input disabled value="#{telephone}" type="tel" name="telephone" lay-verify="required|phone" autocomplete="off" lay-reqtext="请填写手机号" lay-affix="clear" class="layui-input demo-phone">\n' +
+                        '                                </div>\n' +
+                        '                            </div>\n' +
+                        '                        </div>\n' +
+                        '\n' +
+                        '                         <div class="layui-form-item">\n' +
+                        '                            <div class="layui-inline">\n' +
+                        '                                <label class="layui-form-label">爱好</label>\n' +
+                        '                                <div class="layui-input-inline layui-input-wrap">\n' +
+                        '                                    <input disabled value="#{hobby}" type="text" name="hobby"  autocomplete="off" class="layui-input">\n' +
+                        '                                </div>\n' +
+                        '                            </div>\n' +
+                        '                        </div>\n' +
+
+                        '                        <div class="layui-form-item">\n' +
+                        '                            <div class="layui-inline">\n' +
+                        '                                <label class="layui-form-label">性别</label>\n' +
+                        '                                <div class="layui-input-inline">\n' +
+                        '                                    <input disabled value="#{gender}" type="text" name="gender"  autocomplete="off" class="layui-input">\n' +
+                        '                                </div>\n' +
+                        '                            </div>\n' +
+                        '                        </div>\n' +
+
+                        '                        <div class="layui-form-item">\n' +
+                        '                            <div class="layui-inline">\n' +
+                        '                                <label class="layui-form-label">超级管理员</label>\n' +
+                        '                                <div class="layui-input-inline">\n' +
+                        '                                    <input disabled value="#{isAdmin}" type="text" name="isAdmin"  autocomplete="off" class="layui-input">\n' +
+                        '                                </div>\n' +
+                        '                            </div>\n' +
+                        '                        </div>\n' +
+                        '\n' +
+
+                        '                        <div class="layui-form-item">\n' +
+                        '                            <div class="layui-inline">\n' +
+                        '                                <label class="layui-form-label">创建时间</label>\n' +
+                        '                                <div class="layui-input-block">\n' +
+                        '                                    <input disabled value="#{createdTime}" type="text" name="createdtime" id="date1" autocomplete="off" class="layui-input">\n' +
+                        '                                </div>\n' +
+                        '                            </div>\n' +
+                        '                            <div class="layui-inline">\n' +
+                        '                                <label class="layui-form-label">修改时间</label>\n' +
+                        '                                <div class="layui-input-inline">\n' +
+                        '                                    <input disabled value="#{modifiedTime}" type="text" name="modifiedtime" autocomplete="off" class="layui-input">\n' +
+                        '                                </div>\n' +
+                        '                            </div>\n' +
+                        '                        </div>\n' +
+                        '\n' +
+                        '\n' +
+                        '                        <div class="layui-form-item layui-form-text">\n' +
+                        '                            <label class="layui-form-label">个性签名</label>\n' +
+                        '                            <div class="layui-input-block">\n' +
+                        '                                <textarea disabled placeholder="请输入内容" class="layui-textarea">#{signature}</textarea>\n' +
+                        '                            </div>\n' +
+                        '                        </div>\n' +
+                        '                    </form>'
+
+                    // 拿到上面追加html的内容
+                    html = html.replace(/#{username}/g,json.data.username)
+                    html = html.replace(/#{email}/g,json.data.email==null ? "" : json.data.email)
+                    html = html.replace(/#{telephone}/g,json.data.telephone==null ? "" : json.data.telephone)
+                    html = html.replace(/#{hobby}/g,json.data.hobby==null ? "" : json.data.hobby)
+                    html = html.replace(/#{gender}/g,json.data.gender==null ? "" : json.data.gender)
+                    html = html.replace(/#{isAdmin}/g,json.data.isAdmin=="是" ? json.data.isAdmin : "否" )
+                    html = html.replace(/#{createdTime}/g,json.data.createdTime)
+                    html = html.replace(/#{modifiedTime}/g,json.data.modifiedTime==null ? "" : json.data.modifiedTime)
+                    html = html.replace(/#{signature}/g,json.data.signature==null ? "" : json.data.signature)
+                    // let radio_gender = json.data.gender ==0 ? $("#gender-female") : $("#gender-male")
+                    // radio_gender.prop("checked","checked")
+                    // $("input:radio[value='" + result.gender +"']").prop("checked", true);
+                    // $("input:radio[value='"+json.data.gender+"']").prop("checked","checked");
+                    //处理性别选中
+                    // let radio_admin = json.data.isAdmin ==0 ? $("#admin_no") : $("#admin_yes")
+                    // radio_admin.prop("checked","checked")
+
+                    $(".layui-card-body").append(html)
+
+                    // 选择器
+                    // if (json.data.gender != null){
+                    //     let radio = json.data.gender ==0 ? $("#gender-female") : $("#gender-male")
+                    //     radio.prop("checked","checked")
+                    // } else {
+                    //     // 性别选项默认不选
+                    //     $("input[name='inlineRadioOptions']").attr('checked',false);
+                    // }
+
+                    //layui单选框不能动态显示，需要重新渲染一下表单
+                    layui.use('form', function(){
+                        let form = layui.form;
+                        form.render();   //更新所有form表单
+                        // form.render('select','aihao');
+                        //form.render('组件名','lay-filter名')
+                    });
+
+                }else {
+                    alert("" + json.message)
+                }
+            },
+            error:function (xhr){
+                alert("点击用户信息时产生未知的异常"+xhr.status)
+            }
+        });
+    }
+// 修改资料 页面加载
+    function showChangeInfo(){
+        // 清空内容
+        $(".layui-card-body").empty();
+
+        // 发送ajax请求 展示修改资料信息
+        $.ajax({
+            url:"/users/detail",
+            type:"GET",
+            // data:"username="+username+"&password="+password,
+            // data:{"username": username, "password": password}, 不需要发送请求
+            dataType:"JSON",
+            success:function (json){
+                if (json.state == 200){
+                    let html = ' <!-- 给容器追加 class="layui-form-pane"，即可显示为方框风格 -->\n' +
+                        '                    <form class="layui-form layui-form-pane" action="">\n' +
+                        '\n' +
+                        '                        <div class="layui-form-item">\n' +
+                        '                            <label class="layui-form-label">用户名</label>\n' +
+                        '                            <div class="layui-input-inline">\n' +
+                        '                                <input disabled value="#{username}" type="text" name="username" placeholder="" lay-verify="required" autocomplete="off" class="layui-input">\n' +
+                        '                            </div>\n' +
+                        '                        </div>\n' +
+                        '\n' +
+                        '                        <div class="layui-form-item">\n' +
+                        '                            <div class="layui-inline">\n' +
+                        '                                <label class="layui-form-label">邮箱</label>\n' +
+                        '                                <div class="layui-input-inline">\n' +
+                        '                                    <input id="email" value="#{email}" type="text" name="email" autocomplete="off" class="layui-input">\n' +
+                        '                                </div>\n' +
+                        '                            </div>\n' +
+                        '                        </div>\n' +
+                        '\n' +
+                        '                        <div class="layui-form-item">\n' +
+                        '                            <div class="layui-inline">\n' +
+                        '                                <label class="layui-form-label">电话号码</label>\n' +
+                        '                                <div class="layui-input-inline layui-input-wrap">\n' +
+                        '                                    <input id="telephone" value="#{telephone}" type="tel" name="telephone"  autocomplete="off"   class="layui-input">\n' +
+                        '                                </div>\n' +
+                        '                            </div>\n' +
+                        '                        </div>\n' +
+                        '\n' +
+                        '                         <div class="layui-form-item">\n' +
+                        '                            <div class="layui-inline">\n' +
+                        '                                <label class="layui-form-label">爱好</label>\n' +
+                        '                                <div class="layui-input-inline layui-input-wrap">\n' +
+                        '                                    <input id="hobby" value="#{hobby}" type="text" name="hobby"  autocomplete="off" class="layui-input">\n' +
+                        '                                </div>\n' +
+                        '                            </div>\n' +
+                        '                        </div>\n' +
+
+                        '                        <div class="layui-form-item">\n' +
+                        '                            <div class="layui-inline">\n' +
+                        '                                <label class="layui-form-label">性别</label>\n' +
+                        '                                <div class="layui-input-inline">\n' +
+                        '                                    <input id="gender" value="#{gender}" type="text" name="gender"  autocomplete="off" class="layui-input">\n' +
+                        '                                </div>\n' +
+                        '                           <div class="layui-form-mid layui-word-aux">请填 男/女</div>' +
+                        '                            </div>\n' +
+                        '                        </div>\n' +
+
+                        '                        <div class="layui-form-item">\n' +
+                        '                            <div class="layui-inline">\n' +
+                        '                                <label class="layui-form-label">超级管理员</label>\n' +
+                        '                                <div class="layui-input-inline">\n' +
+                        '                                    <input id="isAdmin" value="#{isAdmin}" type="text" name="isAdmin"  autocomplete="off" class="layui-input">\n' +
+                        '                                </div>\n' +
+                        '                            <div class="layui-form-mid layui-word-aux">请填 是/否</div>' +
+                        '                            </div>\n' +
+                        '                        </div>\n' +
+
+                        '\n' +
+                        '                        <div class="layui-form-item layui-form-text">\n' +
+                        '                            <label class="layui-form-label">个性签名</label>\n' +
+                        '                            <div class="layui-input-block">\n' +
+                        '                                <textarea id="signature" placeholder="请输入内容" class="layui-textarea">#{signature}</textarea>\n' +
+                        '                            </div>\n' +
+                        '                        </div>\n' +
+                        '                        <div class="layui-form-item">\n' +
+                        '                            <button type="button" onclick="changeinfobutton()" class="layui-btn" lay-filter="demo2">修改</button>\n' +
+                        '                            <button type="reset" class="layui-btn layui-btn-primary">重置</button>\n' +
+                        '                        </div>\n' +
+                        '                    </form>'
+
+                    // 拿到上面追加html的内容
+                    html = html.replace(/#{username}/g,json.data.username)
+                    html = html.replace(/#{email}/g,json.data.email==null ? "" : json.data.email)
+                    html = html.replace(/#{telephone}/g,json.data.telephone==null ? "" : json.data.telephone)
+                    html = html.replace(/#{hobby}/g,json.data.hobby==null ? "" : json.data.hobby)
+                    html = html.replace(/#{gender}/g,json.data.gender==null ? "" : json.data.gender)
+                    html = html.replace(/#{isAdmin}/g,json.data.isAdmin=="是" ? "是" : "否")
+                    html = html.replace(/#{createdTime}/g,json.data.createdTime)
+                    html = html.replace(/#{modifiedTime}/g,json.data.modifiedTime==null ? "" : json.data.modifiedTime)
+                    html = html.replace(/#{signature}/g,json.data.signature==null ? "" : json.data.signature)
+                    $(".layui-card-body").append(html)
+                }else {
+                    alert("" + json.message)
+                }
+            },
+            error:function (xhr){
+                alert("点击用户信息时产生未知的异常"+xhr.status)
+            }
+        });
+    }
+// 修改密码 页面加载
+    function showPassword(){
+    // 清空内容
+    $(".layui-card-body").empty();
+
+    let html = ' <!-- 给容器追加 class="layui-form-pane"，即可显示为方框风格 -->\n' +
+        '                    <form class="layui-form layui-form-pane" action="">\n' +
+
+        '                        <div class="layui-form-item">\n' +
+        '                            <div class="layui-inline">\n' +
+        '                                <label class="layui-form-label">旧密码</label>\n' +
+        '                                <div class="layui-input-inline">\n' +
+        '                                    <input id="oldPassword" value="" type="password" name="oldpassword" autocomplete="off" class="layui-input">\n' +
+        '                                </div>\n' +
+        '                            </div>\n' +
+        '                        </div>\n' +
+        '                        <div class="layui-form-item">\n' +
+        '                            <div class="layui-inline">\n' +
+        '                                <label class="layui-form-label">新密码</label>\n' +
+        '                                <div class="layui-input-inline">\n' +
+        '                                    <input id="newPassword" value="" type="password" name="newpassword" autocomplete="off" class="layui-input">\n' +
+        '                                </div>\n' +
+        '                            </div>\n' +
+        '                        </div>\n' +
+        '                        <div class="layui-form-item">\n' +
+        '                            <div class="layui-inline">\n' +
+        '                                <label class="layui-form-label">确认密码</label>\n' +
+        '                                <div class="layui-input-inline">\n' +
+        '                                    <input id="confirmPassword" value="" type="password" name="confirmpassword" autocomplete="off" class="layui-input">\n' +
+        '                                </div>\n' +
+        '                            </div>\n' +
+        '                        </div>\n' +
+
+        '                        <div class="layui-form-item">\n' +
+        '                            <button type="button" onclick="changepasswordbutton()" class="layui-btn" lay-filter="demo2">修改</button>\n' +
+        '                            <button type="reset" class="layui-btn layui-btn-primary">重置</button>\n' +
+        '                        </div>\n' +
+        '                    </form>'
+
+    $(".layui-card-body").append(html)
+}
+
+
+// 研究生列表 页面加载
+    function showPostUserInfo(){
+    // 清空内容
+        $(".layui-card-body").empty();
+        // 发送ajax请求 展示修改资料信息
+        $.ajax({
+            url:"/postusers/all_postuser",
+            type:"GET",
+            dataType:"JSON",
+            success:function (json){
+                if (json.state == 200){
+
+                    let html =
+                        '                    <div class="layui-form-item">\n' +
+                        '                        \n' +
+                        '                        <div class="layui-inline">\n' +
+                        '                            <label class="layui-form-label">排序方式</label>\n' +
+                        '                            <div class="layui-input-block" style="margin-top:7px">\n' +
+                        '                                <select name="sort" id="sort" lay-verify="required" lay-filter="aihao">\n' +
+                        '                                    <option value="id">学号</option>\n' +
+                        '                                    <option value="name">姓名</option>\n' +
+                        '                                    <option value="gender">性别</option>\n' +
+                        '                                </select>\n' +
+                        '                            </div>\n' +
+                        '                        </div>\n' +
+                        '                        \n' +
+                        '                        <div class="layui-inline">\n' +
+                        '                            <label class="layui-form-label">姓名</label>\n' +
+                        '                            <div class="layui-input-block">\n' +
+                        '                                <input id="search-input" type="text" name="accept" placeholder="请输入" autocomplete="off" class="layui-input">\n' +
+                        '                            </div>\n' +
+                        '                        </div>\n' +
+                        '                        <div class="layui-inline">\n' +
+                        '                            <button id="search-input-button" class="layui-btn layuiadmin-btn-order" lay-submit="" lay-filter="LAY-app-order-search">\n' +
+                        '                                <i class="layui-icon layui-icon-search layuiadmin-button-btn"></i>\n' +
+                        '                            </button>\n' +
+                        '                        </div>\n' +
+
+                        '                        <div class="layui-inline" style="margin-left: 100px">\n' +
+                        '                              <button type="button" onclick="addpostuser()" class="layui-btn">增加</button> \n' +
+                        '                        </div>\n' +
+
+                        '                    </div>'+
+
+                        '                      <table class="layui-table">\n' +
+                        '                        <colgroup>\n' +
+                        '                          <col width="150">\n' +
+                        '                          <col width="200">\n' +
+                        '                          <col>\n' +
+                        '                        </colgroup>'+
+                        '                        <thead>\n' +
+                        '                        <tr>\n' +
+                        '                            <th>编号' +
+                        '<span class="layui-table-sort layui-inline"><i class="layui-edge layui-table-sort-asc" title="升序"></i>' +
+                        '<i class="layui-edge layui-table-sort-desc" title="降序"></i></span></th>\n' +
+                        '                            <th>学号</th>\n' +
+                        '                            <th>姓名</th>\n' +
+                        '                            <th>性别</th>\n' +
+                        '                            <th>城市</th>\n' +
+                        '                            <th>职业</th>\n' +
+                        '                            <th>手机号</th>\n' +
+                        '                            <th>邮箱</th>\n' +
+                        '                            <th>操作</th>\n' +
+                        '                        </tr>\n' +
+                        '                        </thead>\n' +
+
+                        '                        <tbody id="postusers-list">\n' +
+                        '                        </tbody>\n' +
+
+                        '                    </table>' +
+
+                        '<div id="demo0"></div>' +
+                        '<hr><br><br><hr>'
+
+                    // 1.先追加thead+tbody(没内容，为空)
+                    $(".layui-card-body").append(html)
+
+                    let list = json.data  //list列表
+                    // 2.追加tbody内容
+                    for (let i = 0; i < list.length; i++) {
+
+                        let tr = '<tr>\n' +
+                            '                            <th>#{No}</th>\n' +
+
+                            '                            <td>#{id}</td>\n' +
+                            '                            <td>#{name}</td>\n' +
+                            '                            <td>#{gender}</td>\n' +
+                            '                            <td>#{city}</td>\n' +
+                            '                            <td>#{career}</td>\n' +
+                            '                            <td>#{phone}</td>\n' +
+                            '                            <td>#{email}</td>\n' +
+                            '                            <td>\n' +
+
+                            '                                <button type="button" onclick="edite('+list[i].yid+')" class="layui-btn">编辑</button>\n' +
+                            '                                <button type="button" onclick="delete_postuser('+list[i].yid+')" class="layui-btn">删除</button>\n' +
+
+                            '                            </td>\n' +
+                            '                        </tr>\n'
+                        tr = tr.replace(/#{No}/g,i+1)
+
+                        tr = tr.replace(/#{id}/g,list[i].id)
+                        tr = tr.replace(/#{name}/g,list[i].name)
+                        tr = tr.replace(/#{gender}/g,list[i].gender)
+                        tr = tr.replace(/#{city}/g,list[i].city)
+                        tr = tr.replace(/#{career}/g,list[i].career)
+                        tr = tr.replace(/#{phone}/g,list[i].phone)
+                        tr = tr.replace(/#{email}/g,list[i].email)
+
+                        $("#postusers-list").append(tr)
+
+
+                        var v = ""  //按照V排序
+                        // 当v change之后，才能得到v非空
+                        $("#sort").change(function () {
+                            v = $(this).val()
+                        })
+
+
+                        //分页 特效需要的js代码
+                        layui.use(['laypage', 'layer'], function() {
+                            var laypage = layui.laypage
+                                , layer = layui.layer;
+
+                            laypage.render({
+                                elem: 'demo0' //id 不加#
+                                , count: json.counts //数据总数，服务端得到  自动算出页数：28/10=2 .... 8 一共三页
+                                // , limit: 10      //每页显示的条数,默认10
+
+                                , jump: function(obj, first){
+                                    //obj包含了当前分页的所有参数，比如：
+                                    // console.log("当前页:",obj.curr); //得到当前页，以便向服务端请求对应页的数据。
+                                    // console.log("每页显示的条数:",obj.limit); //得到每页显示的条数 10
+                                    if (first){ //首次 默认第1页
+                                        //在第1页的时候，排序方式实现
+                                        // console.log(obj.curr) 10条 渲染十次
+                                         sortpostuser();
+
+                                        searchpostuser()
+                                        }
+                                    if(!first){  //是否首次渲染，点击第2页才执行这个函数
+                                        // layer.msg('第 '+ obj.curr +' 页');
+                                        // findPage(obj.curr); // 页码处理在后端service层处理
+                                        // console.log("V=\"\"",v=="") true
+                                        // console.log(obj.curr)
+                                        findPage(v,obj.curr); // 页码处理在后端service层处理
+
+                                        searchpostuser()
+
+                                    }
+                                }
+                            });
+
+                        })
+
+                    }
+                }else {
+                    alert("" + json.message)
+                }
+            },
+            error:function (xhr){
+                alert("点击用户信息时产生未知的异常"+xhr.status)
+            }
+        });
+
+
+        // 排序方式 change事件， 监听改变事件
+      function sortpostuser(){
+          $("#sort").on('change', function () {
+              var v = $(this).val()  // v= id
+              // 发送ajax请求，按重新 查找排序
+              $.ajax({
+                  url:"/postusers/"+v+"/sort_postusers",
+                  type:"GET",
+                  dataType:"JSON",
+                  success:function (json){
+                      if (json.state == 200){
+
+                          //清空之前的tr内容(tbody内容)
+                          $("#postusers-list").empty()
+                          // 添加新的tr内容     新排序的数据加上
+                          let list = json.data  //list列表
+                          // 2.追加tbody内容
+                          for (let i = 0; i < list.length; i++) {
+                              let tr = '<tr>\n' +
+                                  '                            <th>#{No}</th>\n' +
+                                  '                            <td>#{id}</td>\n' +
+                                  '                            <td>#{name}</td>\n' +
+                                  '                            <td>#{gender}</td>\n' +
+                                  '                            <td>#{city}</td>\n' +
+                                  '                            <td>#{career}</td>\n' +
+                                  '                            <td>#{phone}</td>\n' +
+                                  '                            <td>#{email}</td>\n' +
+                                  '                            <td>\n' +
+                                  '                                <button type="button" onclick="edite('+list[i].yid+')" class="layui-btn">编辑</button>\n' +
+                                  '                                <button type="button" onclick="delete_postuser('+list[i].yid+')" class="layui-btn">删除</button>\n' +
+                                  '                            </td>\n' +
+                                  '                        </tr>\n'
+                              tr = tr.replace(/#{No}/g,i+1)
+                              tr = tr.replace(/#{id}/g,list[i].id)
+                              tr = tr.replace(/#{name}/g,list[i].name)
+                              tr = tr.replace("#{name}",list[i].name)
+                              tr = tr.replace(/#{gender}/g,list[i].gender)
+                              tr = tr.replace(/#{city}/g,list[i].city)
+                              tr = tr.replace(/#{career}/g,list[i].career)
+                              tr = tr.replace(/#{phone}/g,list[i].phone)
+                              tr = tr.replace(/#{email}/g,list[i].email)
+
+                              $("#postusers-list").append(tr)
+                          }
+
+
+                      }else {
+                          alert("" + json.message)
+                      }
+                  },
+                  error:function (xhr){
+                      alert("修改时产生未知的异常"+xhr.status)
+                  }
+              });
+          })
+      }
+
+        //搜索框
+        function searchpostuser(){
+            $("#search-input-button").click(function () {
+                var search = $("#search-input").val()
+                if (search == ""){
+                    layer.msg('请输入搜索名字');
+                }else {
+                    $.ajax({
+                        url:"/postusers/"+search+"/search_postusers",
+                        type:"POST",
+                        dataType:"JSON",
+                        success:function (json){
+                            if (json.state == 200){
+
+                                //清空之前的tr内容(tbody内容)
+                                $("#postusers-list").empty()
+                                //清空 分页展示
+                                $("#demo0").empty()
+                                //排序方式不起作用
+                                $("#sort").attr("disabled",true)
+
+                                // 添加新的tr内容     新排序的数据加上
+                                let list = json.data  //list列表
+                                // 2.追加tbody内容
+                                for (let i = 0; i < list.length; i++) {
+                                    let tr = '<tr>\n' +
+                                        '                            <th>#{No}</th>\n' +
+                                        '                            <td>#{id}</td>\n' +
+                                        '                            <td>#{name}</td>\n' +
+                                        '                            <td>#{gender}</td>\n' +
+                                        '                            <td>#{city}</td>\n' +
+                                        '                            <td>#{career}</td>\n' +
+                                        '                            <td>#{phone}</td>\n' +
+                                        '                            <td>#{email}</td>\n' +
+                                        '                            <td>\n' +
+                                        // '                                <button type="button" onclick="addpostuser()" class="layui-btn">增加</button>\n' +
+                                        '                                <button type="button" onclick="edite('+list[i].yid+')" class="layui-btn">编辑</button>\n' +
+                                        '                                <button type="button" onclick="delete_postuser('+list[i].yid+')" class="layui-btn">删除</button>\n' +
+                                        '                            </td>\n' +
+                                        '                        </tr>\n'
+                                    tr = tr.replace(/#{No}/g,i+1)
+                                    tr = tr.replace(/#{id}/g,list[i].id)
+                                    tr = tr.replace(/#{name}/g,list[i].name)
+                                    tr = tr.replace(/#{gender}/g,list[i].gender)
+                                    tr = tr.replace(/#{city}/g,list[i].city)
+                                    tr = tr.replace(/#{career}/g,list[i].career)
+                                    tr = tr.replace(/#{phone}/g,list[i].phone)
+                                    tr = tr.replace(/#{email}/g,list[i].email)
+
+                                    $("#postusers-list").append(tr)
+                                }
+
+                            }else {
+                                // alert("你所查找的用户信息不存在")
+                                // alert("" + json.message)
+                                layer.msg('你所查找的用户信息不存在');
+                            }
+                        },
+                        error:function (xhr){
+                            alert("查找时产生未知的异常"+xhr.status)
+                        }
+                    });
+                }
+
+            })
+        }
+
+}
+
+// 页码实现
+    function findPage(v,page){
+    // 清空内容
+    $("#postusers-list").empty()
+    $.ajax({
+        // url:"/postusers/"+v+"/"+page+"/pagev_postuser",
+        url:"/postusers/pagev_postuser",
+        type:"GET",
+        data:{"v":v,"page":page},
+        dataType:"JSON",
+        success:function (json){
+            if (json.state == 200){
+
+                let list = json.data  //list列表
+                // 2.追加tbody内容
+                for (let i = 0; i < list.length; i++) {
+                    let tr = '<tr>\n' +
+                        '                            <th>#{No}</th>\n' +
+
+                        '                            <td>#{id}</td>\n' +
+                        '                            <td>#{name}</td>\n' +
+                        '                            <td>#{gender}</td>\n' +
+                        '                            <td>#{city}</td>\n' +
+                        '                            <td>#{career}</td>\n' +
+                        '                            <td>#{phone}</td>\n' +
+                        '                            <td>#{email}</td>\n' +
+                        '                            <td>\n' +
+                        '                                <button type="button" onclick="edite('+list[i].yid+')" class="layui-btn">编辑</button>\n' +
+                        '                                <button type="button" onclick="delete_postuser('+list[i].yid+')" class="layui-btn">删除</button>\n' +
+                        '                            </td>\n' +
+                        '                        </tr>\n'
+                    tr = tr.replace(/#{No}/g,i+1+(page-1)*10)
+
+                    tr = tr.replace(/#{id}/g,list[i].id)
+                    tr = tr.replace(/#{name}/g,list[i].name)
+                    tr = tr.replace(/#{gender}/g,list[i].gender)
+                    tr = tr.replace(/#{city}/g,list[i].city)
+                    tr = tr.replace(/#{career}/g,list[i].career)
+                    tr = tr.replace(/#{phone}/g,list[i].phone)
+                    tr = tr.replace(/#{email}/g,list[i].email)
+                    $("#postusers-list").append(tr)
+
+                }
+            }else {
+                alert("" + json.message)
+            }
+        },
+        error:function (xhr){
+            alert("分页查找用户信息时产生未知的异常"+xhr.status)
+        }
+    });
+}
+
+
+ // 编辑页面加载
+    function showPostUserEditor(yid){
+    // 清空内容
+    $(".layui-card-body").empty();
+
+    // 发送ajax请求 展示修改资料信息
+    $.ajax({
+        url:"/postusers/"+yid+"/getByYid",
+        type:"POST",
+        // restful风格，yid不需要在data中传，在url中传递
+        dataType:"JSON",
+        success:function (json){
+            if (json.state == 200){
+
+                let html = ' <!-- 给容器追加 class="layui-form-pane"，即可显示为方框风格 -->\n' +
+                    '                    <form class="layui-form layui-form-pane" action="">\n' +
+                    '\n' +
+                    '                        <div class="layui-form-item">\n' +
+                    '                            <label class="layui-form-label">yid</label>\n' +
+                    '                            <div class="layui-input-inline">\n' +
+                    '                                <input disabled id="yid" value="#{yid}" type="text" name="yid"  autocomplete="off" class="layui-input">\n' +
+                    '                            </div>\n' +
+                    '                        </div>\n' +
+
+                    '                        <div class="layui-form-item">\n' +
+                    '                            <label class="layui-form-label">学号</label>\n' +
+                    '                            <div class="layui-input-inline">\n' +
+                    '                                <input id="id" value="#{id}" type="text" name="id" placeholder="" lay-verify="required" autocomplete="off" class="layui-input">\n' +
+                    '                            </div>\n' +
+                    '                        </div>\n' +
+                    '\n' +
+                    '                        <div class="layui-form-item">\n' +
+                    '                            <label class="layui-form-label">姓名</label>\n' +
+                    '                            <div class="layui-input-inline">\n' +
+                    '                                <input id="name" value="#{name}" type="text" name="name" placeholder="" lay-verify="required" autocomplete="off" class="layui-input">\n' +
+                    '                            </div>\n' +
+                    '                        </div>\n' +
+                    '\n' +
+
+                    '                        <div class="layui-form-item">\n' +
+                    '                            <div class="layui-inline">\n' +
+                    '                                <label class="layui-form-label">性别</label>\n' +
+                    '                                <div class="layui-input-inline">\n' +
+                    '                                    <input id="gender" value="#{gender}" type="text" name="gender"  autocomplete="off" class="layui-input">\n' +
+                    '                                </div>\n' +
+                    '                           <div class="layui-form-mid layui-word-aux">请填 男/女</div>' +
+                    '                            </div>\n' +
+                    '                        </div>\n' +
+
+                    '\n' +
+                    '                        <div class="layui-form-item">\n' +
+                    '                            <label class="layui-form-label">城市</label>\n' +
+                    '                            <div class="layui-input-inline">\n' +
+                    '                                <input id="city" value="#{city}" type="text" name="city" placeholder="" lay-verify="required" autocomplete="off" class="layui-input">\n' +
+                    '                            </div>\n' +
+                    '                        </div>\n' +
+
+                    '                        <div class="layui-form-item">\n' +
+                    '                            <label class="layui-form-label">职业</label>\n' +
+                    '                            <div class="layui-input-inline">\n' +
+                    '                                <input id="career" value="#{career}" type="text" name="career" placeholder="" lay-verify="required" autocomplete="off" class="layui-input">\n' +
+                    '                            </div>\n' +
+                    '                        </div>\n' +
+
+                    '                        <div class="layui-form-item">\n' +
+                    '                            <div class="layui-inline">\n' +
+                    '                                <label class="layui-form-label">手机号</label>\n' +
+                    '                                <div class="layui-input-inline layui-input-wrap">\n' +
+                    '                                    <input id="phone" value="#{phone}" type="text" name="phone"  autocomplete="off"   class="layui-input">\n' +
+                    '                                </div>\n' +
+                    '                            </div>\n' +
+                    '                        </div>\n' +
+
+                    '                        <div class="layui-form-item">\n' +
+                    '                            <div class="layui-inline">\n' +
+                    '                                <label class="layui-form-label">邮箱</label>\n' +
+                    '                                <div class="layui-input-inline">\n' +
+                    '                                    <input id="email" value="#{email}" type="text" name="email" autocomplete="off" class="layui-input">\n' +
+                    '                                </div>\n' +
+                    '                            </div>\n' +
+                    '                        </div>\n' +
+
+                    '                        <div class="layui-form-item">\n' +
+                    '                            <button type="button" onclick="change_postuser()" class="layui-btn" lay-filter="demo2">修改</button>\n' +
+                    '                            <button type="reset" class="layui-btn layui-btn-primary">重置</button>\n' +
+                    '                        </div>\n' +
+                    '                    </form>'
+                // 拿到上面追加html的内容
+                html = html.replace(/#{yid}/g,yid)
+                html = html.replace(/#{id}/g,json.data.id==null ? "" : json.data.id)
+                html = html.replace(/#{name}/g,json.data.name==null ? "" : json.data.name)
+                html = html.replace(/#{gender}/g,json.data.gender==0 ? "女" : "男")
+                html = html.replace(/#{city}/g,json.data.city==null ? "" : json.data.city)
+                html = html.replace(/#{career}/g,json.data.career==null ? "" : json.data.career)
+                html = html.replace(/#{phone}/g,json.data.phone==null ? "" : json.data.phone)
+                html = html.replace(/#{email}/g,json.data.email==null ? "" : json.data.email)
+                $(".layui-card-body").append(html)
+
+            }else {
+                alert("" + json.message)
+            }
+        },
+        error:function (xhr){
+            alert("点击研究生信息修改按钮时产生未知的异常"+xhr.status)
+        }
+    });
+}
+
+// 编辑页面——修改按钮,发送ajax请求
+    function change_postuser(){
+    var yid = $("#yid").val()
+    var id = $("#id").val()
+    var name = $("#name").val()
+    var gender = $("#gender").val()
+
+   if (gender =="男"){
+        gender = 1
+    }else if (gender =="女"){
+        gender = 0
+    }else{
+        alert("请输入正确的性别格式！！！")
+        return;
+   }
+
+    var city = $("#city").val()
+    var career = $("#career").val()
+    var phone = $("#phone").val()
+    if (phone.length > 11 ){
+        alert("请输入正确的手机格式")
+        return;
+    }
+    var email = $("#email").val()
+
+    $.ajax({
+        url:"/postusers/change_postuser",
+        type:"GET",
+        data:{
+            "yid":yid,
+            "id":id,
+            "name":name,
+            "gender":gender,
+            "city":city,
+            "career":career,
+            "phone":phone,
+            "email": email,
+        },
+        dataType:"JSON",
+        success:function (json){
+            if (json.state == 200){
+                alert("修改成功")
+                return;
+            }else {
+                alert("" + json.message)
+            }
+        },
+        error:function (xhr){
+            alert("修改时产生未知的异常"+xhr.status)
+        }
+    });
+}
+// 编辑按钮_函数
+    function edite(yid){
+        showPostUserEditor(yid);
+    }
+
+//  增加页面加载
+    function showAddUserEditor(){
+        // 清空内容
+        $(".layui-card-body").empty();
+
+        let html = ' <!-- 给容器追加 class="layui-form-pane"，即可显示为方框风格 -->\n' +
+            '                    <form class="layui-form layui-form-pane" action="">\n' +
+
+            '                        <div class="layui-form-item">\n' +
+            '                            <label class="layui-form-label">学号</label>\n' +
+            '                            <div class="layui-input-inline">\n' +
+            '                                <input id="id" value="" type="text" name="id" placeholder="" lay-verify="required" autocomplete="off" class="layui-input">\n' +
+            '                            </div>\n' +
+            '                        </div>\n' +
+            '\n' +
+            '                        <div class="layui-form-item">\n' +
+            '                            <label class="layui-form-label">姓名</label>\n' +
+            '                            <div class="layui-input-inline">\n' +
+            '                                <input id="name" value="" type="text" name="name" placeholder="" lay-verify="required" autocomplete="off" class="layui-input">\n' +
+            '                            </div>\n' +
+            '                        </div>\n' +
+            '\n' +
+
+            '                        <div class="layui-form-item">\n' +
+            '                            <div class="layui-inline">\n' +
+            '                                <label class="layui-form-label">性别</label>\n' +
+            '                                <div class="layui-input-inline">\n' +
+            '                                    <input id="gender" value="" type="text" name="gender"  autocomplete="off" class="layui-input">\n' +
+            '                                </div>\n' +
+            '                           <div class="layui-form-mid layui-word-aux">请填 男/女</div>' +
+            '                            </div>\n' +
+            '                        </div>\n' +
+
+            '\n' +
+            '                        <div class="layui-form-item">\n' +
+            '                            <label class="layui-form-label">城市</label>\n' +
+            '                            <div class="layui-input-inline">\n' +
+            '                                <input id="city" value="" type="text" name="city" placeholder="" lay-verify="required" autocomplete="off" class="layui-input">\n' +
+            '                            </div>\n' +
+            '                        </div>\n' +
+
+            '                        <div class="layui-form-item">\n' +
+            '                            <label class="layui-form-label">职业</label>\n' +
+            '                            <div class="layui-input-inline">\n' +
+            '                                <input id="career" value="" type="text" name="career" placeholder="" lay-verify="required" autocomplete="off" class="layui-input">\n' +
+            '                            </div>\n' +
+            '                        </div>\n' +
+
+            '                        <div class="layui-form-item">\n' +
+            '                            <div class="layui-inline">\n' +
+            '                                <label class="layui-form-label">手机号</label>\n' +
+            '                                <div class="layui-input-inline layui-input-wrap">\n' +
+            '                                    <input id="phone" value="" type="text" name="phone"  autocomplete="off"   class="layui-input">\n' +
+            '                                </div>\n' +
+            '                            </div>\n' +
+            '                        </div>\n' +
+
+            '                        <div class="layui-form-item">\n' +
+            '                            <div class="layui-inline">\n' +
+            '                                <label class="layui-form-label">邮箱</label>\n' +
+            '                                <div class="layui-input-inline">\n' +
+            '                                    <input id="email" value="" type="text" name="email" autocomplete="off" class="layui-input">\n' +
+            '                                </div>\n' +
+            '                            </div>\n' +
+            '                        </div>\n' +
+
+            '                        <div class="layui-form-item">\n' +
+            '                            <button type="button" onclick="add_postuser()" class="layui-btn" lay-filter="demo2">添加</button>\n' +
+            '                            <button type="reset" class="layui-btn layui-btn-primary">重置</button>\n' +
+            '                        </div>\n' +
+            '                    </form>'
+
+        $(".layui-card-body").append(html)
+
+    }
+// 增加页面——添加按钮,发送ajax请求
+    function add_postuser(){
+
+        var id = $("#id").val()
+        if (id == ""){
+            alert("请输入学号")
+            return;
+        }
+        var name = $("#name").val()
+        var gender = $("#gender").val()
+
+        if (gender =="男"){
+            gender = 1
+        }else if (gender =="女"){
+            gender = 0
+        }else{
+            alert("请输入正确的性别格式！！！")
+            return;
+        }
+        var city = $("#city").val()
+        var career = $("#career").val()
+        var phone = $("#phone").val()
+        if (phone.length > 11 ){
+            alert("请输入正确的手机格式")
+            return;
+        }
+        var email = $("#email").val()
+
+        $.ajax({
+            url:"/postusers/add_postuser",
+            type:"GET",
+            data:{
+                "id":id,
+                "name":name,
+                "gender":gender,
+                "city":city,
+                "career":career,
+                "phone":phone,
+                "email": email,
+            },
+            dataType:"JSON",
+            success:function (json){
+                if (json.state == 200){
+                    alert("添加成功")
+                    return;
+                }else {
+                    alert("" + json.message)
+                }
+            },
+            error:function (xhr){
+                alert("添加时产生未知的异常"+xhr.status)
+            }
+        });
+    }
+// 增加按钮_函数
+    function addpostuser(){
+        showAddUserEditor()
+    }
+// 删除按钮,发送ajax请求
+    function delete_postuser(yid) {
+        let flag = confirm("您确定删除吗？他对于您也许真的很重要再想想好不好？");
+        //有一个Boolean类型的返回值
+        if (flag) {
+            $.ajax({
+                url: "/postusers/" + yid + "/delete_postuser",
+                type: "GET",
+                dataType: "JSON",
+                success: function (json) {
+                    if (json.state == 200) {
+                        alert("删除成功")
+                        showPostUserInfo()
+                        return;
+                    } else {
+                        alert("" + json.message)
+                    }
+                },
+                error: function (xhr) {
+                    alert("删除时产生未知的异常" + xhr.status)
+                }
+            });
+        }
+    }
+
+
+// 老师列表 页面加载
+    function showTeacherInfo(){
+    // 清空内容
+    $(".layui-card-body").empty();
+
+    // 表头内容添加上 thead
+    let html =
+        '                    <div class="layui-form-item">\n' +
+
+        '   <div class="layui-inline">\n' +
+        '        <div className="layui-btn-container">\n' +
+
+        '<label style="margin-right: 10px;">排序方式:</label>'+
+                    '<button id="sort_span" class="layui-btn layui-btn-sm demo-dropdown-base">\n' +
+                    '    <span style="width:60px; text-align:center;  display:inline-block;">教工号</span>\n' +
+                    '    <i class="layui-icon layui-icon-down layui-font-8"></i>\n' +
+                    '  </button>'+
+        '        </div>'+
+        '   </div>\n' +
+
+        '                        \n' +
+        '                        <div class="layui-inline">\n' +
+        '                            <label class="layui-form-label">姓名</label>\n' +
+        '                            <div class="layui-input-block">\n' +
+        '                                <input id="search-input" type="text" name="accept" placeholder="请输入" autocomplete="off" class="layui-input">\n' +
+        '                            </div>\n' +
+        '                        </div>\n' +
+        '                        <div class="layui-inline">\n' +
+        '                            <button id="search-input-button" class="layui-btn layuiadmin-btn-order" lay-submit="" lay-filter="LAY-app-order-search">\n' +
+        '                                <i class="layui-icon layui-icon-search layuiadmin-button-btn"></i>\n' +
+        '                            </button>\n' +
+        '                        </div>\n' +
+
+        '                        <div class="layui-inline" style="margin-left: 100px">\n' +
+        '                              <button type="button" onclick="addteacher()" class="layui-btn">增加</button> \n' +
+        '                        </div>\n' +
+
+        '                    </div>'+
+
+        '                      <table class="layui-table">\n' +
+        '                        <colgroup>\n' +
+        '                          <col width="150">\n' +
+        '                          <col width="200">\n' +
+        '                          <col>\n' +
+        '                        </colgroup>'+
+        '                        <thead>\n' +
+        '                        <tr>\n' +
+        '                            <th>编号' +
+        '                            <th>教工号</th>\n' +
+        '                            <th>姓名</th>\n' +
+        '                            <th>性别</th>\n' +
+        '                            <th>职称</th>\n' +
+        '                            <th>毕业学校</th>\n' +
+        '                            <th>手机号</th>\n' +
+        '                            <th>邮箱</th>\n' +
+        '                            <th>操作</th>\n' +
+        '                        </tr>\n' +
+        '                        </thead>\n' +
+        '                        <tbody id="teachers-list">\n' +
+        '                        </tbody>\n' +
+        '                    </table>'
+        $(".layui-card-body").append(html)
+
+
+            // 排序方式layui的js代码
+            layui.use(function() {
+                var dropdown = layui.dropdown;
+                // 渲染
+                dropdown.render({
+                    elem: '.demo-dropdown-base', // 绑定元素选择器，此处指向 class 可同时绑定多个元素
+                    data: [{
+                        title: "教工号",
+                        id: 100
+                    }, {
+                        title: "姓名",
+                        id: 101
+                    }, {
+                        title: "性别",
+                        id: 102
+                    }],
+                    click: function (obj) {
+                        this.elem.find('span').text(obj.title);
+
+                    }
+                });
+            })
+
+            // 发送ajax请求 展示教师列表信息，默认按 教工号 升序 limit 0,8
+            $.ajax({
+                url: "/teachers/all_teacher",
+                type: "GET",
+                dataType: "JSON",
+                success: function (json) {
+                    if (json.state == 200) {
+
+                        let list = json.data  //list列表
+                        // 2.追加tbody内容
+                        for (let i = 0; i < list.length; i++) {
+                            let tr = '<tr>\n' +
+                                '                            <th>#{No}</th>\n' +
+                                '                            <td>#{id}</td>\n' +
+                                '                            <td>#{name}</td>\n' +
+                                '                            <td>#{gender}</td>\n' +
+                                '                            <td>#{position}</td>\n' +
+                                '                            <td>#{graduatedSchool}</td>\n' +
+                                '                            <td>#{phone}</td>\n' +
+                                '                            <td>#{email}</td>\n' +
+                                '                            <td>\n' +
+                                '                                <button type="button" onclick="teacher_detail("+list[i].tid+")" class="layui-btn">查看</button>\n' +
+                                '                                <button type="button" onclick="edite_teacher("+list[i].tid+")" class="layui-btn layui-btn-normal">编辑</button>\n' +
+                                '                                <button type="button" onclick="delete_teacher("+list[i].tid+")" class="layui-btn layui-btn-danger">删除</button>\n' +
+                                '                            </td>\n' +
+                                '                        </tr>\n'
+                            tr = tr.replace(/#{No}/g, i + 1)
+                            tr = tr.replace(/#{id}/g, list[i].id)
+                            tr = tr.replace(/#{name}/g, list[i].name)
+                            tr = tr.replace(/#{gender}/g, list[i].gender)
+                            tr = tr.replace(/#{position}/g, list[i].position)
+                            tr = tr.replace(/#{graduatedSchool}/g, list[i].graduatedSchool)
+                            tr = tr.replace(/#{phone}/g, list[i].phone)
+                            tr = tr.replace(/#{email}/g, list[i].email)
+
+                            $("#teachers-list").append(tr)
+
+                            // 添加分页组件，动态展示页码数
+                            let page ='<div style="position: absolute;bottom: 0px;left: 350px;" id="demo-laypage-theme-1"></div>'
+                            // let page = '<div id="demo-laypage-theme-1"></div> <br><br><br>'
+                            $(".layui-card-body").append(page)
+
+
+                            layui.use(function () {
+                                var laypage = layui.laypage;
+                                // 自定义主题
+                                laypage.render({
+                                    elem: 'demo-laypage-theme-1',
+                                    count: json.counts,
+                                    theme: '#1E9FFF',
+                                    layout: ['count', 'prev', 'page', 'next', 'skip'],
+                                    jump: function (obj, first) {
+
+                                        // 首次加载8条数据，执行8次，  然后点击一次页码，再加1
+                                        // vv++
+                                        // console.log("vv:",vv) 1~8，9，10,11...
+
+                                        if (first) { //首次  首次渲染10次
+                                            // layer.msg('第 '+ obj.curr +' 页');
+                                            n=obj.curr
+                                            // console.log("n",n)
+                                        }
+                                        if (!first) {  //首次不执行，点击第2页才执行这个函数
+                                            // layer.msg('第 '+ obj.curr +' 页');
+                                            // 排序方式没有变了，只是页码变了，只点击页码
+                                            var p = obj.curr
+                                            m=p
+                                            var v = $("#sort_span span").text() //获取排序方式span中动态改变后的文本
+
+                                            if (v == "教工号") {
+                                                v = "id"
+                                            } else if (v == "姓名") {
+                                                v = "name"
+                                            } else if (v == "性别") {
+                                                v = "gender"
+                                            }
+                                            PageVTeacher(p, v)
+
+
+                                        }
+                                    }
+
+                                });
+                            })
+
+                        }
+                    } else {
+                        alert("" + json.message)
+                    }
+                },
+                error: function (xhr) {
+                    alert("点击用户信息时产生未知的异常" + xhr.status)
+                }
+            });
+
+
+        // 拿到变化后的 value 变化了10次，因为每页10条数据,只有写在最后面，才能只显示一次。必须在这一个函数中的最后
+        $("#sort_span span").bind('DOMNodeInserted', function (e) {
+            var v = $("#sort_span span").text() //教工号
+            if (n=1){
+                VTeacher(v)  //first n=1的时候才执行，表示当前默认第1页，且点击 排序方式
+
+                // $(".demo-laypage-theme-1").html("");
+                // let page ='<div style="position: absolute;bottom: 0px;left: 350px;" id="demo-laypage-theme-1"></div>'
+                // // let page = '<div id="demo-laypage-theme-1"></div> <br><br><br>'
+                // $(".layui-card-body").append(page)
+            }
+        })
+
+        // 教师列表排序方式
+        function VTeacher(v){
+            if (v == "教工号") {
+                v = "id"
+            } else if (v == "姓名") {
+                v = "name"
+            } else if (v == "性别") {
+                v = "gender"
+            }
+            $("#teachers-list").empty()
+            $.ajax({
+                url:"/teachers/"+v+"/v_teacher",
+                type:"GET",
+                dataType:"JSON",
+                success:function (json){
+                    if (json.state == 200){
+
+                        let list = json.data  //list列表
+                        // 2.追加tbody内容
+                        for (let i = 0; i < list.length; i++) {
+                            let tr = '<tr>\n' +
+                                '                            <th>#{No}</th>\n' +
+                                '                            <td>#{id}</td>\n' +
+                                '                            <td>#{name}</td>\n' +
+                                '                            <td>#{gender}</td>\n' +
+                                '                            <td>#{position}</td>\n' +
+                                '                            <td>#{graduatedSchool}</td>\n' +
+                                '                            <td>#{phone}</td>\n' +
+                                '                            <td>#{email}</td>\n' +
+                                '                            <td>\n' +
+                                '                                <button type="button" onclick="teacher_detail("+list[i].tid+")" class="layui-btn">查看</button>\n' +
+                                '                                <button type="button" onclick="edite_teacher("+list[i].tid+")" class="layui-btn layui-btn-normal">编辑</button>\n' +
+                                '                                <button type="button" onclick="delete_teacher("+list[i].tid+")" class="layui-btn layui-btn-danger">删除</button>\n' +
+                                '                            </td>\n' +
+                                '                        </tr>\n'
+                            tr = tr.replace(/#{No}/g,i+1)
+                            tr = tr.replace(/#{id}/g,list[i].id)
+                            tr = tr.replace(/#{name}/g,list[i].name)
+                            tr = tr.replace(/#{gender}/g,list[i].gender)
+                            tr = tr.replace(/#{position}/g,list[i].position)
+                            tr = tr.replace(/#{graduatedSchool}/g,list[i].graduatedSchool)
+                            tr = tr.replace(/#{phone}/g,list[i].phone)
+                            tr = tr.replace(/#{email}/g,list[i].email)
+
+                            $("#teachers-list").append(tr)
+
+
+                        }
+
+
+                    }else {
+                        alert("" + json.message)
+                    }
+                },
+                error:function (xhr){
+                    alert("点击用户信息时产生未知的异常"+xhr.status)
+                }
+            });
+        }
+
+}
+
+
+
+
+
+    function PageVTeacher(p,v){
+        $("#teachers-list").empty()
+
+        $.ajax({
+            url:"/teachers/pv_teacher",
+            type:"GET",
+            data:{"p":p,"v":v},
+            dataType:"JSON",
+            success:function (json){
+                if (json.state == 200){
+
+                    let list = json.data  //list列表
+                    // 2.追加tbody内容
+                    for (let i = 0; i < list.length; i++) {
+                        let tr = '<tr>\n' +
+                            '                            <th>#{No}</th>\n' +
+                            '                            <td>#{id}</td>\n' +
+                            '                            <td>#{name}</td>\n' +
+                            '                            <td>#{gender}</td>\n' +
+                            '                            <td>#{position}</td>\n' +
+                            '                            <td>#{graduatedSchool}</td>\n' +
+                            '                            <td>#{phone}</td>\n' +
+                            '                            <td>#{email}</td>\n' +
+                            '                            <td>\n' +
+                            '                                <button type="button" onclick="teacher_detail("+list[i].tid+")" class="layui-btn">查看</button>\n' +
+                            '                                <button type="button" onclick="edite_teacher("+list[i].tid+")" class="layui-btn layui-btn-normal">编辑</button>\n' +
+                            '                                <button type="button" onclick="delete_teacher("+list[i].tid+")" class="layui-btn layui-btn-danger">删除</button>\n' +
+                            '                            </td>\n' +
+                            '                        </tr>\n'
+                        tr = tr.replace(/#{No}/g,i+1+(p-1)*8)
+                        tr = tr.replace(/#{id}/g,list[i].id)
+                        tr = tr.replace(/#{name}/g,list[i].name)
+                        tr = tr.replace(/#{gender}/g,list[i].gender)
+                        tr = tr.replace(/#{position}/g,list[i].position)
+                        tr = tr.replace(/#{graduatedSchool}/g,list[i].graduatedSchool)
+                        tr = tr.replace(/#{phone}/g,list[i].phone)
+                        tr = tr.replace(/#{email}/g,list[i].email)
+
+                        $("#teachers-list").append(tr)
+
+                    }
+
+                }else {
+                    alert("" + json.message)
+                }
+            },
+            error:function (xhr){
+                alert("点击用户信息时产生未知的异常"+xhr.status)
+            }
+        });
+    }
+
+// 功能实现
+// 主页
+
+// 导师刘杰 功能
+    $("#teacher_lj").click(function () {
+        showTeacherLJ();
+    });
+// 个人信息 功能
+    $("#person_info").click(function (){
+        showPersonInfo();
+    })
+
+// 修改资料 功能
+    $("#change_info").click(function (){
+        showChangeInfo();
+    })
+// 修改资料页面_修改信息按钮_函数
+    function changeinfobutton(){
+    var email = $("#email").val()
+    var telephone = $("#telephone").val()
+    var hobby = $("#hobby").val()
+    var gender = $("#gender").val()
+    if (gender != "男" && gender !="女"){
+        alert("请输入正确的性别格式")
+        return;
+    }
+    var isAdmin = $("#isAdmin").val()
+    let signature = $("#signature").val()
+    $.ajax({
+        url:"/users/change_info",
+        type:"GET",
+        data:{"email": email,
+            "telephone": telephone,
+            "hobby":hobby,
+            "gender":gender,
+            "isAdmin":isAdmin,
+            "signature":signature
+        },
+        dataType:"JSON",
+        success:function (json){
+            if (json.state == 200){
+                alert("修改成功")
+                showChangeInfo() //修改成功 跳转至 修改信息页面
+            }else {
+                alert("" + json.message)
+            }
+        },
+        error:function (xhr){
+            alert("修改时产生未知的异常"+xhr.status)
+        }
+    });
+}
+
+// 修改密码 功能
+    $("#change_password").click(function () {
+    showPassword();
+})
+// 修改密码页面_修改密码按钮_函数
+    function changepasswordbutton(){
+        var oldPassword = $("#oldPassword").val()
+        var newPassword = $("#newPassword").val()
+        var confirmPassword = $("#confirmPassword").val()
+
+        if (oldPassword==""){
+            alert("旧密码输入为空，请输入")
+            return false;
+        }else if (newPassword =="" && confirmPassword !=""){
+            alert("新密码输入为空，请输入")
+            return false;
+        }else if (newPassword !="" && confirmPassword ==""){
+            alert("确认密码输入为空，请输入")
+            return false;
+        }else if (newPassword =="" && confirmPassword ==""){
+            alert("新密码输入为空，确认密码输入为空，请输入")
+            return false;
+        }else if (newPassword != confirmPassword){
+            alert("两次输入的密码不一致，请重新输入")
+            return false;
+        }else {
+            $.ajax({
+                url:"/users/change_password",
+                type:"GET",
+                data:{"oldPassword": oldPassword, "newPassword": newPassword},
+                dataType:"JSON",
+                success:function (json){
+                    if (json.state == 200){
+                        alert("修改密码成功")
+                        // 清空文本框,设置为空
+                        // $("#oldPassword").val("")
+                        // $("#newPassword").val("")
+                        // $("#confirmPassword").val("")
+                        // location.href="index_layui.html"
+                        console.log(" showPassword();")
+                        showPassword();
+                    }else {
+                        alert("" + json.message)
+                    }
+                },
+                error:function (xhr){
+                    alert("修改密码时产生未知的异常"+xhr.status)
+                }
+            });
+
+        }
+    }
+
+// 研究生列表 功能
+    $("#underlist").click(function () {
+         showPostUserInfo();
+     })
+// 老师列表 功能
+    $("#teacherlist").click(function () {
+        showTeacherInfo();
+})
+
+
+</script>
+</body>
+</html>

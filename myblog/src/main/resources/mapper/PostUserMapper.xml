@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ncut.myblog.mapper.PostUserMapper">
+
+<!--    研究生表-->
+<!--    List<PostUser> findAllPostUser();点击信息列表 默认第一次查-->
+    <select id="findAllPostUser" resultType="com.ncut.myblog.entity.PostUser">
+        select yid,id,name,gender,city,career,phone,email from t_postuser
+         order by id asc
+         limit 0,10
+    </select>
+
+<!--    List<PostUser> findPagePostUser(Integer page);分页查询 第一页默认学号升序-->
+    <select id="findPagePostUser" resultType="com.ncut.myblog.entity.PostUser">
+        select yid,id,name,gender,city,career,phone,email from t_postuser
+        order by id asc
+        limit #{page},10
+    </select>
+
+<!--    List<PostUser> findPageVPostUser(String v,Integer page); 排序+分页-->
+    <select id="findPageVPostUser" resultType="com.ncut.myblog.entity.PostUser">
+        select yid,id,name,gender,city,career,phone,email from t_postuser
+        order by ${v} asc
+        limit #{page},10
+    </select>
+<!--    PostUser findByYid(Integer yid);-->
+    <select id="findByYid" resultType="com.ncut.myblog.entity.PostUser">
+        select id,name,gender,city,career,phone,email from t_postuser where yid=#{yid}
+    </select>
+
+<!--    Integer updatePostUser(String id,String name,Integer gender,String city,String career,String phone,String email,Integer yid);-->
+    <update id="updatePostUser">
+        update t_postuser set id=if(#{id}="",id,#{id}),
+                              name=if(#{name}="",name,#{name}),
+                              gender=#{gender},
+                              city=if(#{city}="",city,#{city}),
+                              career=if(#{career}="",career,#{career}),
+                              phone=if(#{phone}="",phone,#{phone}),
+                              email=if(#{email}="",email,#{email})
+                          where yid=#{yid}
+    </update>
+
+<!--    Integer insertPostUser(PostUser postUser);-->
+    <insert id="insertPostUser" useGeneratedKeys="true" keyProperty="yid">
+        insert into t_postuser (id,name,gender,city,career,phone,email)
+        values (#{id},#{name},#{gender},#{city},#{career},#{phone},#{email})
+    </insert>
+
+<!--    Integer deletePostUser(Integer yid);-->
+    <delete id="deletePostUser">
+        delete from t_postuser where yid=#{yid}
+    </delete>
+
+
+<!--    List<PostUser> findSortPostUsers(Object v);-->
+    <select id="findSortPostUsers" resultType="com.ncut.myblog.entity.PostUser">
+        select yid,id,name,gender,city,career,phone,email from t_postuser
+        order by ${v} asc
+        limit 0,10
+    </select>
+
+<!--    List<PostUser> searchPostUser(String search);-->
+    <select id="searchPostUser" resultType="com.ncut.myblog.entity.PostUser">
+        select yid,id,name,gender,city,career,phone,email from t_postuser where name=#{name}
+    </select>
+
+<!--    Integer countpostusers();-->
+    <select id="countpostusers" resultType="java.lang.Integer">
+        select count(*) from t_postuser
+    </select>
+</mapper>
